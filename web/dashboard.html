@@ -3,9 +3,276 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ArmBar BI · Dashboard</title>
+  <title>ArmBar BI · Performance Dashboard</title>
   <meta name="robots" content="noindex">
-  <style>html, body { margin: 0; min-height: 100%; background: #0a0a0a; }</style>
+  <!-- Access is enforced on the server by middleware.js. This is a second, browser-side check. -->
+  <script src="js/auth.js"></script>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0b'/%3E%3Ctext x='16' y='22' font-family='Arial Black,Arial' font-weight='900' font-size='15' fill='white' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      color-scheme: dark;
+      --page: #0a0a0a; --surface: #141413; --surface-2: #1a1a19; --line: rgba(255,255,255,.09);
+      --text: #ffffff; --text-2: #c3c2b7; --muted: #898781; --grid: #2c2c2a; --axis: #383835;
+      --brand: #e0182d;                                   /* ArmBar red: brand & buttons only */
+      --gym: #3987e5; --bar: #d95926; --teal: #199e70;                     /* series: validated dark-mode steps */
+      --good: #0ca30c; --warning: #fab219; --critical: #d03b3b;   /* status: always with icon + label */
+      --display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+      --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    body { background: var(--page); color: var(--text); font-family: var(--body); font-size: 14px; line-height: 1.45; }
+    a { color: inherit; }
+
+    /* ---------- header ---------- */
+    .top { position: sticky; top: 0; z-index: 10; background: rgba(10,10,10,.96); border-bottom: 1px solid var(--line); }
+    .top-in { padding: 12px 28px 12px 26px; display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+    .logo { font-family: var(--display); font-size: 26px; letter-spacing: 1.5px; text-decoration: none; }
+    .logo span { color: var(--brand); }
+    /* left sidebar navigation */
+    .shell { display: grid; grid-template-columns: 248px minmax(0, 1fr); }
+    .side { order: -1; border-right: 1px solid var(--line); padding: 26px 18px; position: sticky; top: 67px; align-self: start;
+            height: calc(100vh - 67px); display: flex; flex-direction: column; gap: 6px; }
+    .side h3 { font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; margin: 0 8px 8px; }
+    .tabs { display: flex; flex-direction: column; gap: 4px; }
+    .tab { display: grid; grid-template-columns: 20px 1fr; gap: 2px 10px; text-align: left; background: none; border: 0; color: var(--text-2);
+           font: inherit; padding: 11px 12px; border-radius: 8px; cursor: pointer; border-left: 3px solid transparent; }
+    .tab svg { width: 18px; height: 18px; grid-row: span 2; margin-top: 1px; }
+    .tab b { font-weight: 600; font-size: 14px; }
+    .tab small { grid-column: 2; color: var(--muted); font-size: 11.5px; }
+    .tab:hover { color: #fff; background: rgba(255,255,255,.04); }
+    .tab[aria-selected="true"] { color: #fff; background: rgba(255,255,255,.07); border-left-color: var(--brand); }
+    .tab:focus-visible { outline: 2px solid var(--brand); outline-offset: 2px; }
+    .side .foot { margin-top: auto; font-size: 11.5px; color: var(--muted); padding: 0 8px; display: grid; gap: 8px; }
+    .side .foot a { color: var(--text-2); text-decoration: none; }
+    .side .foot a:hover { color: #fff; }
+    .who { display: flex; align-items: center; gap: 10px; color: var(--text-2); padding-bottom: 4px; }
+    .who b { color: #fff; font-weight: 600; font-size: 13px; }
+    .who small { color: var(--muted); font-size: 11px; }
+    .avatar { width: 32px; height: 32px; border-radius: 50%; background: var(--brand); color: #fff; font-weight: 700; font-size: 11.5px;
+              display: grid; place-items: center; letter-spacing: .04em; flex: none; }
+    .signout { background: none; border: 1px solid var(--line); color: var(--text-2); font: inherit; font-size: 12.5px; border-radius: 6px;
+               padding: 8px 10px; cursor: pointer; text-align: left; }
+    .signout:hover { color: #fff; border-color: rgba(255,255,255,.3); }
+    .signout-top { display: none; }
+    .filters { margin-left: auto; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .filters label { display: flex; flex-direction: column; gap: 2px; font-size: 10.5px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
+    .filters select { font: inherit; font-size: 13px; color: var(--text); background: var(--surface-2); border: 1px solid var(--line);
+                      border-radius: 6px; padding: 7px 10px; min-width: 118px; }
+    .filters select:focus-visible { outline: 2px solid var(--brand); outline-offset: 1px; }
+
+    /* ---------- layout ---------- */
+    main { padding: 22px 32px 40px; min-width: 0; }
+    .page-head { display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
+    .page-head h1 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; letter-spacing: .5px; margin: 0; line-height: 1; }
+    .page-head p { margin: 6px 0 0; color: var(--text-2); }
+    .period { color: var(--muted); font-size: 12.5px; }
+    .grid { display: grid; gap: 16px; }
+    .kpis { grid-template-columns: repeat(4, minmax(0, 1fr)); margin-bottom: 16px; }
+    .row2 { grid-template-columns: 1.35fr 1fr; margin-bottom: 16px; }
+    .card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 18px 20px; min-width: 0; }
+    .card h2 { font-size: 15px; font-weight: 600; margin: 0; }
+    .card .sub { color: var(--muted); font-size: 12px; margin: 3px 0 12px; }
+    .chart-box { position: relative; height: 300px; }
+
+    /* ---------- KPI cards ---------- */
+    .kpi { display: flex; flex-direction: column; gap: 6px; position: relative; overflow: hidden; }
+    .kpi .label { color: var(--text-2); font-size: 13px; display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; }
+    .kpi .value { font-size: 34px; font-weight: 600; letter-spacing: -.5px; line-height: 1.1; }
+    .kpi .cmp { font-size: 12.5px; color: var(--text-2); }
+    .kpi .cmp b { font-weight: 600; }
+    .up { color: #3ecf5c; } .down { color: #f07070; }
+    .status { display: inline-flex; align-items: center; gap: 6px; font-size: 11.5px; font-weight: 600; letter-spacing: .02em;
+              padding: 3px 9px 3px 7px; border-radius: 999px; white-space: nowrap; border: 1px solid; }
+    .status svg { width: 12px; height: 12px; }
+    .status.good { color: var(--good); border-color: rgba(12,163,12,.45); background: rgba(12,163,12,.1); }
+    .status.warning { color: var(--warning); border-color: rgba(250,178,25,.45); background: rgba(250,178,25,.08); }
+    .status.critical { color: #ff6b6b; border-color: rgba(208,59,59,.55); background: rgba(208,59,59,.12); }
+    .spark { height: 34px; margin-top: 2px; }
+
+    /* ---------- table ---------- */
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 760px; }
+    th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--grid); vertical-align: middle; }
+    th { color: var(--muted); font-weight: 500; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; }
+    td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    tbody tr:hover { background: rgba(255,255,255,.03); }
+    td .why { color: var(--text-2); font-size: 12.5px; }
+    td .branch { font-weight: 600; }
+    .dim { opacity: .4; }
+
+    .legend { display: flex; gap: 16px; font-size: 12px; color: var(--text-2); margin: -4px 0 8px; }
+    .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 2px; margin-right: 6px; vertical-align: -1px; }
+
+    footer { color: var(--muted); font-size: 12px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap;
+             border-top: 1px solid var(--line); margin-top: 26px; padding-top: 14px; }
+    .placeholder { padding: 70px 20px; text-align: center; color: var(--muted); border: 1px dashed var(--grid); border-radius: 10px; }
+    [hidden] { display: none !important; }
+
+    .row2.even { grid-template-columns: 1fr 1fr; }
+    @media (min-width: 1700px) { .chart-box { height: 340px; } .chart-box.tall { height: 420px; } }
+    .chart-box.tall { height: 380px; }
+    @media (max-width: 1180px) { .kpis { grid-template-columns: repeat(2, minmax(0,1fr)); } .row2, .row2.even { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+      .shell { grid-template-columns: 1fr; }
+      .side { order: -1; position: sticky; top: 0; z-index: 9; height: auto; border-right: 0; border-bottom: 1px solid var(--line);
+              padding: 8px 16px; background: rgba(10,10,10,.96); }
+      .side h3, .side .foot, .tab small, .tab svg { display: none; }
+      .tabs { flex-direction: row; }
+      .tab { display: block; border-left: 0; border-bottom: 2px solid transparent; border-radius: 6px 6px 0 0; padding: 8px 12px; }
+      .tabs { gap: 2px; } .tab { flex: 1; text-align: center; } .tab b { white-space: nowrap; font-size: 13px; }
+      .tab[aria-selected="true"] { border-bottom-color: var(--brand); }
+      .top { position: static; }
+      .signout-top { display: inline-block; margin-left: auto; padding: 7px 12px; }
+    }
+    @media (max-width: 640px) {
+      .top-in, main { padding-left: 16px; padding-right: 16px; }
+      .top-in { gap: 12px; }
+      .filters { margin-left: 0; width: 100%; }
+      .filters label { flex: 1 1 45%; } .filters select { width: 100%; min-width: 0; }
+      .kpis { grid-template-columns: 1fr; gap: 10px; }
+      .kpi { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; row-gap: 2px; }
+      .kpi .label { grid-column: 1 / -1; }
+      .kpi .value { font-size: 26px; }
+      .kpi .cmp { grid-column: 1; }
+      .kpi .spark { grid-column: 2; grid-row: 2 / 4; width: 110px; height: 44px; align-self: center; }
+      .card { padding: 14px; }
+      .page-head h1 { font-size: 26px; }
+      .chart-box { height: 260px; }
+    }
+  </style>
 </head>
-<body></body>
+<body>
+  <header class="top">
+    <div class="top-in">
+      <a class="logo" href="index.html" title="Back to home">ARM<span>BAR</span></a>
+      <button class="signout signout-top" type="button" data-signout>Sign out</button>
+      <div class="filters" aria-label="Filters">
+        <label>From<select id="fFrom"></select></label>
+        <label>To<select id="fTo"></select></label>
+        <label>Branch<select id="fBranch"></select></label>
+        <label>Business unit
+          <select id="fUnit"><option value="all">Gym + Bar</option><option value="gym">ArmBar Gym</option><option value="bar">ArmBar Bar</option></select>
+        </label>
+      </div>
+    </div>
+  </header>
+
+  <div class="shell">
+  <main>
+    <!-- ===================== PAGE 1 ===================== -->
+    <section id="page-overview">
+      <div class="page-head">
+        <div>
+          <h1>Performance overview</h1>
+          <p id="headline">Where should management step in next month?</p>
+        </div>
+        <span class="period" id="periodNote"></span>
+      </div>
+
+      <div class="grid kpis" id="kpis"></div>
+
+      <div class="grid row2">
+        <article class="card">
+          <h2 id="tTrend">Monthly revenue</h2>
+          <p class="sub">BQ1 · Revenue by business unit per month. The selected period is highlighted.</p>
+          <div class="legend"><span><i style="background:var(--gym)"></i>ArmBar Gym</span><span><i style="background:var(--bar)"></i>ArmBar Bar</span></div>
+          <div class="chart-box"><canvas id="cTrend" aria-label="Monthly revenue by business unit"></canvas></div>
+        </article>
+        <article class="card">
+          <h2 id="tBranch">Revenue by branch</h2>
+          <p class="sub">BQ2 · BQ3 · Revenue split Gym vs Bar. Operating margin shown at the end of each bar.</p>
+          <div class="legend"><span><i style="background:var(--gym)"></i>ArmBar Gym</span><span><i style="background:var(--bar)"></i>ArmBar Bar</span></div>
+          <div class="chart-box"><canvas id="cBranch" aria-label="Revenue by branch"></canvas></div>
+        </article>
+      </div>
+
+      <article class="card">
+        <h2 id="tExc">Branches needing attention</h2>
+        <p class="sub">BQ5 · Act now: renewal &lt; 65% or operating margin &lt; 15%. Watch: renewal &lt; 70%, margin &lt; 25%, or revenue falling vs prior period.</p>
+        <div class="table-wrap"><table id="tblExc"></table></div>
+      </article>
+    </section>
+
+    <!-- ===================== PAGE 2 ===================== -->
+    <section id="page-drill" hidden>
+      <div class="page-head">
+        <div>
+          <h1>Gym &amp; Bar drill-down</h1>
+          <p id="headline2">What is driving the numbers inside each business unit?</p>
+        </div>
+        <span class="period" id="periodNote2"></span>
+      </div>
+
+      <div class="grid kpis" id="kpis2"></div>
+
+      <div class="grid row2">
+        <article class="card" data-unit="gym">
+          <h2 id="tRenew">Membership renewal rate by branch</h2>
+          <p class="sub">BQ2 · BQ5 · Gym · 3-month rolling renewal rate. Dashed line = 70% target.</p>
+          <div class="chart-box tall"><canvas id="cRenew" aria-label="Renewal rate by branch"></canvas></div>
+        </article>
+        <article class="card" data-unit="bar">
+          <h2 id="tDisc">Member discount effect</h2>
+          <p class="sub">BQ4 · BQ5 · Bar · The 15% gym-member discount started Jan 2026.</p>
+          <div class="legend"><span><i style="background:var(--bar)"></i>Bar gross margin</span><span><i style="background:var(--teal)"></i>Member share of Bar sales</span></div>
+          <div class="chart-box" style="height:340px"><canvas id="cDisc" aria-label="Bar gross margin and member share"></canvas></div>
+        </article>
+      </div>
+
+      <div class="grid row2 even">
+        <article class="card" data-unit="bar">
+          <h2 id="tProd">Bar products by gross profit</h2>
+          <p class="sub">BQ4 · Bar · Top 10 by gross profit (sales after discount − cost of goods). Top 3 highlighted; margin % at the end of each bar.</p>
+          <div class="chart-box tall"><canvas id="cProd" aria-label="Bar products by gross profit"></canvas></div>
+        </article>
+        <article class="card" data-unit="gym">
+          <h2 id="tPlans">Gym revenue by plan and service</h2>
+          <p class="sub">BQ4 · Gym · Solid = membership plans, lighter = paid services. Share of Gym revenue at the end of each bar.</p>
+          <div class="chart-box tall"><canvas id="cPlans" aria-label="Gym revenue by plan and service"></canvas></div>
+        </article>
+      </div>
+    </section>
+
+    <footer>
+      <span id="source">Source: ArmBar Gym system, Bar POS, Finance (simulated data)</span>
+      <span id="refresh"></span>
+    </footer>
+  </main>
+
+  <aside class="side" aria-label="Dashboard navigation">
+    <h3>Dashboard</h3>
+    <nav class="tabs" role="tablist" aria-label="Dashboard pages">
+      <button class="tab" role="tab" aria-selected="true" data-page="overview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+        <b>Performance overview</b><small>KPIs, branches, exceptions</small></button>
+      <button class="tab" role="tab" aria-selected="false" data-page="drill">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M16 16l5 5"/></svg>
+        <b>Gym &amp; Bar drill-down</b><small>Renewals, products, plans</small></button>
+    </nav>
+    <div class="foot">
+      <div class="who"><span class="avatar" aria-hidden="true">GM</span><span><b id="whoName">admin</b><br><small>General Manager</small></span></div>
+      <button class="signout" type="button" data-signout>Sign out</button>
+      <a href="index.html">← Back to home</a>
+      <span id="refreshSide"></span>
+    </div>
+  </aside>
+  </div>
+
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="data/armbar-data.js"></script>
+  <script src="js/dashboard.js"></script>
+  <script>
+    ArmBarAuth.session().then((s) => {
+      if (s.ok) { document.getElementById("whoName").textContent = s.data.user; return; }
+      if (s.status === 401) location.replace("index.html#login?next=" + encodeURIComponent("dashboard.html" + location.hash));
+    });
+    document.querySelectorAll("[data-signout]").forEach((b) => b.addEventListener("click", async () => {
+      await ArmBarAuth.signOut(); location.replace("index.html");
+    }));
+  </script>
+</body>
 </html>

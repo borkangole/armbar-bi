@@ -34,6 +34,29 @@ armbar-bi/
 - After editing `src/site.js`, rebuild the bundle:
   `npm i gsap lenis esbuild` then `npx esbuild web/src/site.js --bundle --minify --format=iife --outfile=web/js/site.js`
 
+## Security (login)
+
+The dashboard is protected on the server, with no passwords in the website code.
+
+| File | What it does |
+|---|---|
+| `web/api/login.js` | Checks username + password on Vercel's servers (PBKDF2-SHA256 salted hash, constant-time compare). Locks an IP for 15 min after 5 wrong tries, slows every failed attempt, rejects logins posted from other sites. |
+| `web/api/session.js` / `web/api/logout.js` | Reports whether you're signed in / clears the session. |
+| `web/middleware.js` | Runs **before** the dashboard, its script, or the data file are sent. No valid session cookie means a redirect to the login overlay, or HTTP 401 for the data. |
+| `web/api/_lib/session.js` | Signs session cookies (HMAC-SHA256): HttpOnly, Secure, SameSite=Strict. The cookie lasts 12 hours, or 7 days with "Keep me signed in". |
+| `web/vercel.json` | Security headers on every page: CSP, no framing, HSTS, nosniff, and no caching of dashboard data. |
+
+### One-time setup in Vercel
+1. Run `node tools/make-password-hash.mjs "YourStrongPassword"` (at least 10 characters).
+2. In Vercel, open the project, then **Settings → Environment Variables**, and add:
+   - `ARMBAR_USER`: your username, e.g. `admin`
+   - `ARMBAR_PASS_HASH`: the `ARMBAR_PASS_HASH` line printed by step 1
+   - `ARMBAR_SECRET`: the `ARMBAR_SECRET` line printed by step 1
+3. Redeploy (Deployments → ⋯ → Redeploy). To change the password later, repeat all three steps.
+
+### Running locally
+Double-clicking the files still shows the site, but the login needs a server. Run `npx vercel dev` in the project folder, then open the address it prints.
+
 ## 2. Deploy to your domain
 
 The site is plain static files, so any static host works. Pick **one** of the options below.

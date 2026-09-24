@@ -1,0 +1,6 @@
+{
+  "name": "armbar-bi-web",
+  "private": true,
+  "type": "module",
+  "description": "ArmBar BI site: static pages + Vercel functions (api/) + middleware for the protected dashboard"
+}

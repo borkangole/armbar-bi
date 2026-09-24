@@ -29,6 +29,7 @@ if (!reduceMotion) {
     wheelMultiplier: 0.85, touchMultiplier: 1.4, smoothWheel: true,
   });
   lenis.on("scroll", ScrollTrigger.update);
+  window.__lenis = lenis;                                  // lets the login overlay pause scrolling
   gsap.ticker.add((t) => lenis.raf(t * 1000));
   gsap.ticker.lagSmoothing(0);
   $$('a[href^="#"]').forEach((a) => a.addEventListener("click", (e) => {
