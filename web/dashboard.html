@@ -19,6 +19,8 @@
       --brand: #e0182d;                                   /* ArmBar red: brand & buttons only */
       --gym: #3987e5; --bar: #d95926; --teal: #199e70;                     /* series: validated dark-mode steps */
       --good: #0ca30c; --warning: #fab219; --critical: #d03b3b;   /* status: always with icon + label */
+      --tip-bg: #1f1f1e; --band: rgba(255,255,255,.045); --crit-text: #ff6b6b; --context-line: rgba(195,194,183,.35);
+      --hi1: #ffffff; --hi2: #ff8a8a; --hi3: #f5c542;
       --display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
       --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
     }
@@ -112,6 +114,78 @@
     .placeholder { padding: 70px 20px; text-align: center; color: var(--muted); border: 1px dashed var(--grid); border-radius: 10px; }
     [hidden] { display: none !important; }
 
+    /* ---------- export menu ---------- */
+    .export { position: relative; align-self: flex-end; }
+    .export > button { display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 13px; font-weight: 600; color: #fff;
+      background: var(--brand); border: 0; border-radius: 6px; padding: 9px 14px; cursor: pointer; }
+    .export > button:hover { background: #b0101f; }
+    .export > button svg { width: 15px; height: 15px; }
+    .menu { position: absolute; right: 0; top: calc(100% + 6px); min-width: 250px; background: #1a1a19; border: 1px solid var(--line);
+            border-radius: 10px; padding: 6px; box-shadow: 0 20px 40px -16px rgba(0,0,0,.7); z-index: 30;
+            opacity: 0; transform: translateY(-4px); pointer-events: none; transition: opacity .15s ease, transform .15s ease; }
+    .export.open .menu { opacity: 1; transform: none; pointer-events: auto; }
+    .menu button { display: grid; grid-template-columns: 20px 1fr; gap: 1px 10px; width: 100%; text-align: left; background: none; border: 0;
+                   color: var(--text); font: inherit; padding: 9px 10px; border-radius: 6px; cursor: pointer; }
+    .menu button:hover, .menu button:focus-visible { background: rgba(255,255,255,.06); outline: none; }
+    .menu svg { width: 18px; height: 18px; grid-row: span 2; color: var(--text-2); margin-top: 1px; }
+    .menu b { font-weight: 600; font-size: 13px; } .menu small { grid-column: 2; color: var(--muted); font-size: 11.5px; }
+    .menu hr { border: 0; border-top: 1px solid var(--line); margin: 5px 4px; }
+    .toast { position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); background: #1f1f1e; border: 1px solid var(--line);
+             color: var(--text); padding: 10px 16px; border-radius: 8px; font-size: 13px; opacity: 0; transition: opacity .25s ease, transform .25s ease; z-index: 60; }
+    .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+    /* ---------- insights & report page ---------- */
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; font: inherit; font-size: 13px; font-weight: 600; color: var(--text);
+                 background: transparent; border: 1px solid rgba(255,255,255,.25); border-radius: 6px; padding: 9px 14px; cursor: pointer; }
+    .btn-ghost:hover { border-color: #fff; }
+    .btn-ghost svg { width: 15px; height: 15px; }
+    .insights { display: grid; gap: 14px; margin-bottom: 16px; }
+    .ins { display: grid; grid-template-columns: 56px 1fr 1fr 1fr; gap: 0; padding: 0; overflow: hidden; }
+    .ins .no { font-family: var(--display); font-size: 30px; color: var(--brand); padding: 18px 0 0 20px; }
+    .ins .col { padding: 18px 20px; border-left: 1px solid var(--line); }
+    .ins .col h4 { margin: 0 0 6px; font-size: 10.5px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+    .ins .col p { margin: 0; color: var(--text-2); font-size: 13.5px; line-height: 1.55; }
+    .ins .col p b { color: var(--text); font-weight: 600; }
+    .ins .col.action p { color: var(--text); }
+    .ins .title { grid-column: 1 / -1; padding: 16px 20px 0; font-weight: 600; font-size: 15px; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .ins .title .tag { font-size: 11px; font-weight: 500; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: 2px 8px; }
+    .ins .col.evidence .big { display: block; font-size: 22px; font-weight: 600; color: var(--text); margin-bottom: 2px; letter-spacing: -.3px; }
+    .recs td:first-child { width: 36px; font-family: var(--display); color: var(--brand); font-size: 20px; }
+    .prio { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 999px; border: 1px solid; white-space: nowrap; }
+    .prio.high { color: #ff6b6b; border-color: rgba(208,59,59,.55); } .prio.med { color: var(--warning); border-color: rgba(250,178,25,.5); }
+    .limits { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 16px; }
+    .limits ul { margin: 0; padding-left: 18px; color: var(--text-2); font-size: 13.5px; line-height: 1.6; }
+    .limits li + li { margin-top: 6px; }
+    .print-head { display: none; }
+    @media (max-width: 1100px) { .ins { grid-template-columns: 44px 1fr; } .ins .col { grid-column: 2; border-left: 0; border-top: 1px solid var(--line); }
+      .ins .no { grid-row: 2 / span 3; padding-left: 16px; } .limits { grid-template-columns: 1fr; } }
+
+    /* ---------- print / save as PDF ---------- */
+    @page { size: A4 landscape; margin: 12mm; }
+    html[data-print] {
+      color-scheme: light;
+      --page: #ffffff; --surface: #ffffff; --surface-2: #f4f4f2; --line: #d9d8d2; --text: #0b0b0b; --text-2: #3d3c39; --muted: #6b6a65;
+      --grid: #e4e3dc; --axis: #c3c2b7; --gym: #2a78d6; --bar: #d9531f; --teal: #16875f;
+      --tip-bg: #ffffff; --band: rgba(0,0,0,.05); --crit-text: #b3261e; --context-line: rgba(80,80,80,.35);
+      --hi1: #0b0b0b; --hi2: #c62828; --hi3: #b7791f;
+    }
+    @media print {
+      body { background: #fff !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+      .top, .side, .export, .no-print, .toast { display: none !important; }
+      .shell { display: block; }
+      main { padding: 0; }
+      .card { break-inside: avoid; border-color: #d9d8d2; }
+      .print-head { display: flex; justify-content: space-between; align-items: baseline; border-bottom: 2px solid #e0182d; padding-bottom: 8px; margin-bottom: 14px; }
+      .print-head .logo { font-family: var(--display); font-size: 22px; color: #0b0b0b; letter-spacing: 1px; } .print-head .logo span { color: #e0182d; } .print-head > span:last-child { font-size: 11px; color: #555; }
+      .up { color: #1b7a2e !important; } .down { color: #b3261e !important; }
+      .status.good { color: #1b7a2e; } .status.critical { color: #b3261e; } .status.warning { color: #8a5a00; }
+      .chart-box, .chart-box.tall { height: 260px !important; }
+      .chart-box canvas { width: 100% !important; height: 100% !important; }
+      .kpis { grid-template-columns: repeat(4, 1fr) !important; }
+      .row2 { grid-template-columns: 1.35fr 1fr !important; } .row2.even { grid-template-columns: 1fr 1fr !important; }
+      table { min-width: 0; }
+    }
+
     .row2.even { grid-template-columns: 1fr 1fr; }
     @media (min-width: 1700px) { .chart-box { height: 340px; } .chart-box.tall { height: 420px; } }
     .chart-box.tall { height: 380px; }
@@ -123,7 +197,8 @@
       .side h3, .side .foot, .tab small, .tab svg { display: none; }
       .tabs { flex-direction: row; }
       .tab { display: block; border-left: 0; border-bottom: 2px solid transparent; border-radius: 6px 6px 0 0; padding: 8px 12px; }
-      .tabs { gap: 2px; } .tab { flex: 1; text-align: center; } .tab b { white-space: nowrap; font-size: 13px; }
+      .tabs { gap: 2px; overflow-x: auto; scrollbar-width: none; } .tabs::-webkit-scrollbar { display: none; }
+      .tab { flex: 0 0 auto; text-align: center; } .tab b { white-space: nowrap; font-size: 13px; }
       .tab[aria-selected="true"] { border-bottom-color: var(--brand); }
       .top { position: static; }
       .signout-top { display: inline-block; margin-left: auto; padding: 7px 12px; }
@@ -133,6 +208,7 @@
       .top-in { gap: 12px; }
       .filters { margin-left: 0; width: 100%; }
       .filters label { flex: 1 1 45%; } .filters select { width: 100%; min-width: 0; }
+      .export { flex: 1 1 100%; } .export > button { width: 100%; justify-content: center; } .menu { left: 0; right: 0; }
       .kpis { grid-template-columns: 1fr; gap: 10px; }
       .kpi { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; row-gap: 2px; }
       .kpi .label { grid-column: 1 / -1; }
@@ -157,12 +233,31 @@
         <label>Business unit
           <select id="fUnit"><option value="all">Gym + Bar</option><option value="gym">ArmBar Gym</option><option value="bar">ArmBar Bar</option></select>
         </label>
+        <div class="export" id="export">
+          <button type="button" id="exportBtn" aria-haspopup="menu" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M12 3v12m0 0l-4.5-4.5M12 15l4.5-4.5M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+            Export
+          </button>
+          <div class="menu" role="menu" aria-label="Export">
+            <button role="menuitem" type="button" data-export="xlsx">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M4 9h16M4 15h16M10 3v18"/></svg>
+              <b>Excel workbook (.xlsx)</b><small>Summary, branches, monthly, products, insights</small></button>
+            <button role="menuitem" type="button" data-export="csv">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M14 3H6a2 2 0 00-2 2v14a2 2 0 002 2h12a2 2 0 002-2V9z"/><path fill="none" stroke="currentColor" stroke-width="1.8" d="M14 3v6h6"/></svg>
+              <b>CSV (.csv)</b><small>Monthly figures by branch</small></button>
+            <hr>
+            <button role="menuitem" type="button" data-export="print">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6 9V3h12v6M6 18H4a1 1 0 01-1-1v-6a2 2 0 012-2h14a2 2 0 012 2v6a1 1 0 01-1 1h-2M6 14h12v7H6z"/></svg>
+              <b>Print / Save as PDF</b><small>Current page, print-friendly</small></button>
+          </div>
+        </div>
       </div>
     </div>
   </header>
 
   <div class="shell">
   <main>
+    <div class="print-head"><span class="logo">ARM<span>BAR</span> <small style="font-family:var(--body);font-size:12px;letter-spacing:0;color:#555">Business Intelligence</small></span><span id="printCtx"></span></div>
     <!-- ===================== PAGE 1 ===================== -->
     <section id="page-overview">
       <div class="page-head">
@@ -237,6 +332,43 @@
       </div>
     </section>
 
+    <!-- ===================== PAGE 3 ===================== -->
+    <section id="page-report" hidden>
+      <div class="page-head">
+        <div>
+          <h1>Insights &amp; recommendations</h1>
+          <p id="headline3">Evidence → Insight → Recommended action, generated from the selected filters.</p>
+        </div>
+        <div class="no-print" style="display:flex; gap:10px; align-items:center; flex-wrap:wrap">
+          <span class="period" id="periodNote3"></span>
+          <button class="btn-ghost" type="button" data-export="print">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6 9V3h12v6M6 18H4a1 1 0 01-1-1v-6a2 2 0 012-2h14a2 2 0 012 2v6a1 1 0 01-1 1h-2M6 14h12v7H6z"/></svg>
+            Print report</button>
+        </div>
+      </div>
+
+      <div class="insights" id="insights"></div>
+
+      <article class="card">
+        <h2>Recommended actions</h2>
+        <p class="sub">5.11 · Prioritised actions, each tied to the KPI that will show whether it worked.</p>
+        <div class="table-wrap"><table class="recs" id="tblRecs"></table></div>
+      </article>
+
+      <div class="limits">
+        <article class="card">
+          <h2>Limitations</h2>
+          <p class="sub">5.12 · What this prototype can't yet tell management.</p>
+          <ul id="limits"></ul>
+        </article>
+        <article class="card">
+          <h2>Next steps</h2>
+          <p class="sub">5.12 · Practical improvements after the midterm.</p>
+          <ul id="nexts"></ul>
+        </article>
+      </div>
+    </section>
+
     <footer>
       <span id="source">Source: ArmBar Gym system, Bar POS, Finance (simulated data)</span>
       <span id="refresh"></span>
@@ -252,6 +384,9 @@
       <button class="tab" role="tab" aria-selected="false" data-page="drill">
         <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M16 16l5 5"/></svg>
         <b>Gym &amp; Bar drill-down</b><small>Renewals, products, plans</small></button>
+      <button class="tab" role="tab" aria-selected="false" data-page="report">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 18h6M10 21h4M12 3a6 6 0 00-3.6 10.8c.6.5 1 1.2 1 2V16h5.2v-.2c0-.8.4-1.5 1-2A6 6 0 0012 3z"/></svg>
+        <b>Insights &amp; report</b><small>Findings, actions, limitations</small></button>
     </nav>
     <div class="foot">
       <div class="who"><span class="avatar" aria-hidden="true">GM</span><span><b id="whoName">admin</b><br><small>General Manager</small></span></div>
@@ -265,6 +400,7 @@
   <script src="vendor/chart.umd.min.js"></script>
   <script src="data/armbar-data.js"></script>
   <script src="js/dashboard.js"></script>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
   <script>
     ArmBarAuth.session().then((s) => {
       if (s.ok) { document.getElementById("whoName").textContent = s.data.user; return; }
