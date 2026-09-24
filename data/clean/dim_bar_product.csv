@@ -1,0 +1,17 @@
+product_id,product_name,category,unit_price,unit_cost
+D01,San Miguel Pale Pilsen,Beer,95,40
+D02,San Mig Light,Beer,95,41
+D03,Red Horse,Beer,100,43
+D04,Craft IPA,Beer,190,92
+D05,Mojito,Cocktails,230,62
+D06,Long Island Iced Tea,Cocktails,290,88
+D07,House Margarita,Cocktails,250,72
+D08,Protein Shake,Non-Alcoholic,180,84
+D09,Iced Coffee,Non-Alcoholic,120,34
+D10,Fresh Fruit Shake,Non-Alcoholic,140,46
+D11,Bottled Water,Non-Alcoholic,40,14
+F01,Pork Sisig,Food,260,118
+F02,Chicken Wings,Food,290,138
+F03,Loaded Nachos,Food,230,88
+F04,Grilled Chicken Bowl,Food,250,126
+F05,Calamares,Food,240,104

@@ -1,0 +1,10 @@
+issue_id,source_table,issue,rows_affected,treatment,bi_impact_if_untreated
+DQ-1,bar_sales_lines,"Branch code typed inconsistently in POS (e.g. 'b02', 'ILOILO', 'B-03', 'MNL', trailing spaces)",5200,"Trimmed, upper-cased and mapped aliases to master branch_id; unmapped codes fail the load",Sales split across phantom branches; Iloilo/Kalibo/Manila revenue understated
+DQ-2,bar_sales_lines,Exact duplicate POS lines created by offline re-sync,1207,"Removed exact duplicates (same txn, time, product, qty, amount)",Bar revenue and transaction counts overstated
+DQ-4,bar_sales_lines,Voided items exported as negative-quantity lines,618,Each void netted against its original line (618 originals removed); voids tracked separately,Revenue overstated if negatives ignored; product quantities distorted
+DQ-3,bar_sales_lines,Member discount applied but member_id not captured at POS,1033,Classified as member sale (discount proves membership); flagged member_unidentified=1; cashier training recommended,Member share of Bar sales understated; cannot link spend to individual member
+DQ-5a,membership_payments,Mixed date formats (Kalibo manual sheet uses MM/DD/YYYY),1669,Parsed both formats explicitly into ISO dates; rejected rows would be logged,Kalibo payments dropped or assigned to wrong month
+DQ-5b,membership_payments,Blank plan_id on manually encoded payments,50,Inferred plan from amount (each plan has a unique price),Revenue by plan incomplete; renewal expiry cannot be computed
+DQ-6,membership_payments (derived),Memberships expiring in the last 14 days cannot show a renewal yet (right-censoring),267,Excluded from Renewal Rate until the 14-day grace window has passed (observable=0),Latest month's renewal rate falsely low -> false alarm
+INFO,membership_payments,Payments dated before Jan-2025 (history),1987,Kept only to compute expiry/renewal; excluded from revenue,-
+PRIV,members,Member full names present in source,4945,Dropped from BI dataset (not needed for any KPI); member_id kept as pseudonymous key,Unnecessary personal data exposure

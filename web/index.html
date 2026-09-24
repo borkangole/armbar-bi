@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ArmBar BI Dashboard</title>
+  <meta name="description" content="ArmBar Business Intelligence dashboard - branch and business-unit performance for ArmBar Gym and ArmBar Bar.">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0b'/%3E%3Ctext x='16' y='22' font-family='Arial Black,Arial' font-weight='900' font-size='15' fill='white' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="logo">ARMBAR</span>
+      <span class="brand-sub">Business Intelligence</span>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Dashboard pages">
+      <button role="tab" class="tab" aria-selected="true" data-page="overview">Performance overview</button>
+      <button role="tab" class="tab" aria-selected="false" data-page="drilldown">Gym &amp; Bar drilldown</button>
+      <button role="tab" class="tab" aria-selected="false" data-page="about">Data &amp; KPIs</button>
+    </nav>
+    <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
+      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
+    </button>
+  </header>
+
+  <section class="filters" aria-label="Filters">
+    <label>From <select id="fFrom"></select></label>
+    <label>To <select id="fTo"></select></label>
+    <label>Branch <select id="fBranch"></select></label>
+    <label>Business unit
+      <select id="fUnit">
+        <option value="all">Gym + Bar</option>
+        <option value="0">ArmBar Gym</option>
+        <option value="1">ArmBar Bar</option>
+      </select>
+    </label>
+    <button id="fReset" class="link-btn" type="button">Reset</button>
+    <span id="periodNote" class="muted small"></span>
+  </section>
+
+  <main>
+    <!-- ============================== PAGE 1 ============================== -->
+    <section id="page-overview" class="page" role="tabpanel">
+      <div class="kpis" id="kpisOverview"></div>
+
+      <div class="grid g-2">
+        <article class="card">
+          <header><h2>Monthly revenue by business unit</h2><p class="q">BQ1 · Is performance rising, falling or stable?</p></header>
+          <div class="chart-box"><canvas id="cRevTrend"></canvas></div>
+        </article>
+        <article class="card">
+          <header><h2>Revenue by branch</h2><p class="q">BQ2/BQ3 · Where does revenue come from, Gym or Bar?</p></header>
+          <div class="chart-box"><canvas id="cRevBranch"></canvas></div>
+        </article>
+      </div>
+
+      <div class="grid g-2">
+        <article class="card">
+          <header><h2>Operating profit margin by branch</h2><p class="q">BQ2/BQ3 · Which branch and unit turns revenue into profit?</p></header>
+          <div class="chart-box"><canvas id="cMarginBranch"></canvas></div>
+        </article>
+        <article class="card">
+          <header><h2>Branches needing attention</h2><p class="q">BQ5 · Exceptions vs. thresholds, selected period</p></header>
+          <div class="table-wrap"><table class="tbl" id="tExceptions"></table></div>
+          <p class="muted small" id="thresholdNote"></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================== PAGE 2 ============================== -->
+    <section id="page-drilldown" class="page" role="tabpanel" hidden>
+      <div class="kpis" id="kpisDrill"></div>
+
+      <div class="grid g-2">
+        <article class="card">
+          <header><h2>Membership renewal rate by branch <span class="muted small">(3-month rolling)</span></h2><p class="q">Gym · Which branches are losing members?</p></header>
+          <div class="chart-box"><canvas id="cRenewal"></canvas></div>
+        </article>
+        <article class="card">
+          <header><h2>Bar gross margin and member share of sales</h2><p class="q">Bar · What did the 15% member discount (from Jan 2026) do?</p></header>
+          <div class="chart-box"><canvas id="cBarMargin"></canvas></div>
+        </article>
+      </div>
+
+      <div class="grid g-2">
+        <article class="card">
+          <header><h2>Bar products by gross profit</h2><p class="q">BQ4 · Which Bar products contribute most?</p></header>
+          <div class="chart-box tall"><canvas id="cProducts"></canvas></div>
+        </article>
+        <article class="card">
+          <header><h2>Gym revenue by membership plan and service</h2><p class="q">BQ4 · Which Gym offerings contribute most?</p></header>
+          <div class="chart-box tall"><canvas id="cGymMix"></canvas></div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ============================== PAGE 3 ============================== -->
+    <section id="page-about" class="page" role="tabpanel" hidden>
+      <article class="card">
+        <header><h2>KPI definitions</h2><p class="q">How every number on this dashboard is calculated</p></header>
+        <div class="table-wrap"><table class="tbl" id="tKpiDefs"></table></div>
+      </article>
+      <article class="card">
+        <header><h2>Data-quality log</h2><p class="q">Issues found in the source exports and how the preparation step treated them</p></header>
+        <div class="table-wrap"><table class="tbl" id="tDq"></table></div>
+      </article>
+      <article class="card">
+        <header><h2>About this prototype</h2></header>
+        <p class="prose">Data: simulated ArmBar operating data, Jan 2025 – Jun 2026, 5 branches. Sources: Gym membership system,
+          Bar point-of-sale, Finance expense sheet. Pipeline: <code>generate_raw.py</code> → <code>prepare.py</code> (cleaning,
+          integration, star schema) → this dashboard. Revenue is recorded on a cash basis (membership fees count in the month paid).
+          <span id="genDate"></span></p>
+      </article>
+    </section>
+  </main>
+
+  <div id="tooltip" class="sr-only" aria-live="polite"></div>
+  <script src="vendor/chart.umd.min.js"></script>
+  <script src="data/armbar-data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

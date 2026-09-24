@@ -1,0 +1,721 @@
+month,branch_id,business_unit,expense_category,amount
+2025-01,B01,Gym,Staff Salaries,118490.34
+2025-01,B01,Gym,Rent,77012.37
+2025-01,B01,Gym,Utilities,39020.07
+2025-01,B01,Gym,Supplies & Maintenance,17288.82
+2025-01,B01,Bar,Staff Salaries,121075.21
+2025-01,B01,Bar,Rent,73626.21
+2025-01,B01,Bar,Utilities,34943.35
+2025-01,B01,Bar,Supplies & Maintenance,18173.35
+2025-01,B02,Gym,Staff Salaries,133832.66
+2025-01,B02,Gym,Rent,88008.29
+2025-01,B02,Gym,Utilities,45561.76
+2025-01,B02,Gym,Supplies & Maintenance,19987.98
+2025-01,B02,Bar,Staff Salaries,135585.47
+2025-01,B02,Bar,Rent,83913.29
+2025-01,B02,Bar,Utilities,44812.0
+2025-01,B02,Bar,Supplies & Maintenance,20562.07
+2025-01,B03,Gym,Staff Salaries,79275.16
+2025-01,B03,Gym,Rent,51239.65
+2025-01,B03,Gym,Utilities,25618.08
+2025-01,B03,Gym,Supplies & Maintenance,10558.21
+2025-01,B03,Bar,Staff Salaries,98595.31
+2025-01,B03,Bar,Rent,60564.66
+2025-01,B03,Bar,Utilities,30367.51
+2025-01,B03,Bar,Supplies & Maintenance,14686.92
+2025-01,B04,Gym,Staff Salaries,168883.49
+2025-01,B04,Gym,Rent,98053.52
+2025-01,B04,Gym,Utilities,48739.82
+2025-01,B04,Gym,Supplies & Maintenance,23580.13
+2025-01,B04,Bar,Staff Salaries,131230.38
+2025-01,B04,Bar,Rent,86974.42
+2025-01,B04,Bar,Utilities,42962.12
+2025-01,B04,Bar,Supplies & Maintenance,20687.37
+2025-01,B05,Gym,Staff Salaries,188191.73
+2025-01,B05,Gym,Rent,116096.1
+2025-01,B05,Gym,Utilities,59761.64
+2025-01,B05,Gym,Supplies & Maintenance,27273.97
+2025-01,B05,Bar,Staff Salaries,172552.24
+2025-01,B05,Bar,Rent,104778.26
+2025-01,B05,Bar,Utilities,51347.92
+2025-01,B05,Bar,Supplies & Maintenance,23558.97
+2025-02,B01,Gym,Staff Salaries,118375.68
+2025-02,B01,Gym,Rent,74220.26
+2025-02,B01,Gym,Utilities,38726.95
+2025-02,B01,Gym,Supplies & Maintenance,17276.86
+2025-02,B01,Bar,Staff Salaries,113101.92
+2025-02,B01,Bar,Rent,72285.06
+2025-02,B01,Bar,Utilities,36339.06
+2025-02,B01,Bar,Supplies & Maintenance,16769.66
+2025-02,B02,Gym,Staff Salaries,134787.7
+2025-02,B02,Gym,Rent,88601.6
+2025-02,B02,Gym,Utilities,41444.26
+2025-02,B02,Gym,Supplies & Maintenance,20454.77
+2025-02,B02,Bar,Staff Salaries,136740.81
+2025-02,B02,Bar,Rent,86305.06
+2025-02,B02,Bar,Utilities,44896.1
+2025-02,B02,Bar,Supplies & Maintenance,20212.5
+2025-02,B03,Gym,Staff Salaries,76864.15
+2025-02,B03,Gym,Rent,50269.89
+2025-02,B03,Gym,Utilities,26098.71
+2025-02,B03,Gym,Supplies & Maintenance,12076.43
+2025-02,B03,Bar,Staff Salaries,95034.85
+2025-02,B03,Bar,Rent,63178.94
+2025-02,B03,Bar,Utilities,29666.05
+2025-02,B03,Bar,Supplies & Maintenance,14661.38
+2025-02,B04,Gym,Staff Salaries,161139.11
+2025-02,B04,Gym,Rent,100966.88
+2025-02,B04,Gym,Utilities,51760.48
+2025-02,B04,Gym,Supplies & Maintenance,23730.26
+2025-02,B04,Bar,Staff Salaries,148504.26
+2025-02,B04,Bar,Rent,85349.24
+2025-02,B04,Bar,Utilities,43925.09
+2025-02,B04,Bar,Supplies & Maintenance,22534.44
+2025-02,B05,Gym,Staff Salaries,176557.52
+2025-02,B05,Gym,Rent,116069.72
+2025-02,B05,Gym,Utilities,56715.87
+2025-02,B05,Gym,Supplies & Maintenance,25596.11
+2025-02,B05,Bar,Staff Salaries,173277.8
+2025-02,B05,Bar,Rent,104407.13
+2025-02,B05,Bar,Utilities,50546.71
+2025-02,B05,Bar,Supplies & Maintenance,23871.28
+2025-03,B01,Gym,Staff Salaries,114124.67
+2025-03,B01,Gym,Rent,75202.98
+2025-03,B01,Gym,Utilities,35973.74
+2025-03,B01,Gym,Supplies & Maintenance,17189.05
+2025-03,B01,Bar,Staff Salaries,118844.66
+2025-03,B01,Bar,Rent,76008.6
+2025-03,B01,Bar,Utilities,35603.22
+2025-03,B01,Bar,Supplies & Maintenance,17054.01
+2025-03,B02,Gym,Staff Salaries,124022.49
+2025-03,B02,Gym,Rent,85838.6
+2025-03,B02,Gym,Utilities,41846.54
+2025-03,B02,Gym,Supplies & Maintenance,21108.95
+2025-03,B02,Bar,Staff Salaries,138104.52
+2025-03,B02,Bar,Rent,86107.3
+2025-03,B02,Bar,Utilities,43127.25
+2025-03,B02,Bar,Supplies & Maintenance,18930.07
+2025-03,B03,Gym,Staff Salaries,80848.15
+2025-03,B03,Gym,Rent,52318.65
+2025-03,B03,Gym,Utilities,25804.51
+2025-03,B03,Gym,Supplies & Maintenance,10662.41
+2025-03,B03,Bar,Staff Salaries,96952.43
+2025-03,B03,Bar,Rent,62719.41
+2025-03,B03,Bar,Utilities,31963.05
+2025-03,B03,Bar,Supplies & Maintenance,13117.83
+2025-03,B04,Gym,Staff Salaries,152080.09
+2025-03,B04,Gym,Rent,99872.04
+2025-03,B04,Gym,Utilities,48876.34
+2025-03,B04,Gym,Supplies & Maintenance,23234.18
+2025-03,B04,Bar,Staff Salaries,135133.81
+2025-03,B04,Bar,Rent,83308.84
+2025-03,B04,Bar,Utilities,44979.43
+2025-03,B04,Bar,Supplies & Maintenance,20395.97
+2025-03,B05,Gym,Staff Salaries,174985.73
+2025-03,B05,Gym,Rent,112156.02
+2025-03,B05,Gym,Utilities,58846.87
+2025-03,B05,Gym,Supplies & Maintenance,27802.55
+2025-03,B05,Bar,Staff Salaries,186082.86
+2025-03,B05,Bar,Rent,101426.01
+2025-03,B05,Bar,Utilities,55023.52
+2025-03,B05,Bar,Supplies & Maintenance,24302.75
+2025-04,B01,Gym,Staff Salaries,120600.57
+2025-04,B01,Gym,Rent,75558.66
+2025-04,B01,Gym,Utilities,43284.46
+2025-04,B01,Gym,Supplies & Maintenance,17104.67
+2025-04,B01,Bar,Staff Salaries,110787.66
+2025-04,B01,Bar,Rent,72870.1
+2025-04,B01,Bar,Utilities,38942.47
+2025-04,B01,Bar,Supplies & Maintenance,16264.0
+2025-04,B02,Gym,Staff Salaries,143942.49
+2025-04,B02,Gym,Rent,86276.76
+2025-04,B02,Gym,Utilities,45557.73
+2025-04,B02,Gym,Supplies & Maintenance,19983.34
+2025-04,B02,Bar,Staff Salaries,133505.56
+2025-04,B02,Bar,Rent,77436.49
+2025-04,B02,Bar,Utilities,49896.08
+2025-04,B02,Bar,Supplies & Maintenance,19977.16
+2025-04,B03,Gym,Staff Salaries,81304.07
+2025-04,B03,Gym,Rent,49927.06
+2025-04,B03,Gym,Utilities,28045.71
+2025-04,B03,Gym,Supplies & Maintenance,11391.1
+2025-04,B03,Bar,Staff Salaries,100324.27
+2025-04,B03,Bar,Rent,58764.61
+2025-04,B03,Bar,Utilities,34426.57
+2025-04,B03,Bar,Supplies & Maintenance,14616.16
+2025-04,B04,Gym,Staff Salaries,158310.58
+2025-04,B04,Gym,Rent,94871.87
+2025-04,B04,Gym,Utilities,55230.7
+2025-04,B04,Gym,Supplies & Maintenance,23353.85
+2025-04,B04,Bar,Staff Salaries,140889.2
+2025-04,B04,Bar,Rent,89046.31
+2025-04,B04,Bar,Utilities,46614.03
+2025-04,B04,Bar,Supplies & Maintenance,21728.01
+2025-04,B05,Gym,Staff Salaries,190010.04
+2025-04,B05,Gym,Rent,110485.78
+2025-04,B05,Gym,Utilities,63760.22
+2025-04,B05,Gym,Supplies & Maintenance,25847.42
+2025-04,B05,Bar,Staff Salaries,175772.9
+2025-04,B05,Bar,Rent,100160.51
+2025-04,B05,Bar,Utilities,59764.33
+2025-04,B05,Bar,Supplies & Maintenance,25697.81
+2025-05,B01,Gym,Staff Salaries,113708.68
+2025-05,B01,Gym,Rent,70966.48
+2025-05,B01,Gym,Utilities,38698.95
+2025-05,B01,Gym,Supplies & Maintenance,17120.27
+2025-05,B01,Bar,Staff Salaries,119300.99
+2025-05,B01,Bar,Rent,73764.7
+2025-05,B01,Bar,Utilities,39924.86
+2025-05,B01,Bar,Supplies & Maintenance,18014.82
+2025-05,B02,Gym,Staff Salaries,145499.96
+2025-05,B02,Gym,Rent,87505.14
+2025-05,B02,Gym,Utilities,45627.62
+2025-05,B02,Gym,Supplies & Maintenance,19663.35
+2025-05,B02,Bar,Staff Salaries,139053.74
+2025-05,B02,Bar,Rent,81991.23
+2025-05,B02,Bar,Utilities,46043.09
+2025-05,B02,Bar,Supplies & Maintenance,19552.11
+2025-05,B03,Gym,Staff Salaries,76130.24
+2025-05,B03,Gym,Rent,48822.96
+2025-05,B03,Gym,Utilities,26921.94
+2025-05,B03,Gym,Supplies & Maintenance,10864.93
+2025-05,B03,Bar,Staff Salaries,91903.46
+2025-05,B03,Bar,Rent,57883.36
+2025-05,B03,Bar,Utilities,31121.79
+2025-05,B03,Bar,Supplies & Maintenance,14681.23
+2025-05,B04,Gym,Staff Salaries,152241.83
+2025-05,B04,Gym,Rent,106217.82
+2025-05,B04,Gym,Utilities,55674.29
+2025-05,B04,Gym,Supplies & Maintenance,21790.64
+2025-05,B04,Bar,Staff Salaries,139363.19
+2025-05,B04,Bar,Rent,80235.53
+2025-05,B04,Bar,Utilities,48231.72
+2025-05,B04,Bar,Supplies & Maintenance,19631.26
+2025-05,B05,Gym,Staff Salaries,180711.19
+2025-05,B05,Gym,Rent,119707.7
+2025-05,B05,Gym,Utilities,63090.81
+2025-05,B05,Gym,Supplies & Maintenance,26214.16
+2025-05,B05,Bar,Staff Salaries,161669.65
+2025-05,B05,Bar,Rent,108340.51
+2025-05,B05,Bar,Utilities,54401.77
+2025-05,B05,Bar,Supplies & Maintenance,23848.6
+2025-06,B01,Gym,Staff Salaries,115308.69
+2025-06,B01,Gym,Rent,77919.93
+2025-06,B01,Gym,Utilities,34877.98
+2025-06,B01,Gym,Supplies & Maintenance,17092.1
+2025-06,B01,Bar,Staff Salaries,118225.97
+2025-06,B01,Bar,Rent,74925.76
+2025-06,B01,Bar,Utilities,36956.27
+2025-06,B01,Bar,Supplies & Maintenance,16871.72
+2025-06,B02,Gym,Staff Salaries,139975.76
+2025-06,B02,Gym,Rent,83219.5
+2025-06,B02,Gym,Utilities,45155.51
+2025-06,B02,Gym,Supplies & Maintenance,19976.44
+2025-06,B02,Bar,Staff Salaries,128685.24
+2025-06,B02,Bar,Rent,84587.9
+2025-06,B02,Bar,Utilities,43626.9
+2025-06,B02,Bar,Supplies & Maintenance,20152.14
+2025-06,B03,Gym,Staff Salaries,78103.4
+2025-06,B03,Gym,Rent,46990.01
+2025-06,B03,Gym,Utilities,24838.76
+2025-06,B03,Gym,Supplies & Maintenance,11008.75
+2025-06,B03,Bar,Staff Salaries,100157.64
+2025-06,B03,Bar,Rent,59830.99
+2025-06,B03,Bar,Utilities,29648.58
+2025-06,B03,Bar,Supplies & Maintenance,13715.96
+2025-06,B04,Gym,Staff Salaries,147871.35
+2025-06,B04,Gym,Rent,97869.85
+2025-06,B04,Gym,Utilities,50541.13
+2025-06,B04,Gym,Supplies & Maintenance,24317.86
+2025-06,B04,Bar,Staff Salaries,137565.3
+2025-06,B04,Bar,Rent,89114.5
+2025-06,B04,Bar,Utilities,46499.24
+2025-06,B04,Bar,Supplies & Maintenance,21126.27
+2025-06,B05,Gym,Staff Salaries,187782.42
+2025-06,B05,Gym,Rent,108063.38
+2025-06,B05,Gym,Utilities,59511.34
+2025-06,B05,Gym,Supplies & Maintenance,26064.63
+2025-06,B05,Bar,Staff Salaries,162756.83
+2025-06,B05,Bar,Rent,110051.59
+2025-06,B05,Bar,Utilities,48097.78
+2025-06,B05,Bar,Supplies & Maintenance,23511.46
+2025-07,B01,Gym,Staff Salaries,115488.6
+2025-07,B01,Gym,Rent,70858.43
+2025-07,B01,Gym,Utilities,37701.97
+2025-07,B01,Gym,Supplies & Maintenance,17218.72
+2025-07,B01,Bar,Staff Salaries,118294.31
+2025-07,B01,Bar,Rent,75790.76
+2025-07,B01,Bar,Utilities,36152.43
+2025-07,B01,Bar,Supplies & Maintenance,17104.43
+2025-07,B02,Gym,Staff Salaries,145415.03
+2025-07,B02,Gym,Rent,87669.1
+2025-07,B02,Gym,Utilities,43134.3
+2025-07,B02,Gym,Supplies & Maintenance,20707.05
+2025-07,B02,Bar,Staff Salaries,142564.81
+2025-07,B02,Bar,Rent,83412.79
+2025-07,B02,Bar,Utilities,41985.75
+2025-07,B02,Bar,Supplies & Maintenance,18364.03
+2025-07,B03,Gym,Staff Salaries,79447.08
+2025-07,B03,Gym,Rent,47377.87
+2025-07,B03,Gym,Utilities,26274.0
+2025-07,B03,Gym,Supplies & Maintenance,12207.81
+2025-07,B03,Bar,Staff Salaries,96477.12
+2025-07,B03,Bar,Rent,60616.06
+2025-07,B03,Bar,Utilities,28574.4
+2025-07,B03,Bar,Supplies & Maintenance,13817.42
+2025-07,B04,Gym,Staff Salaries,151490.35
+2025-07,B04,Gym,Rent,99917.04
+2025-07,B04,Gym,Utilities,50327.88
+2025-07,B04,Gym,Supplies & Maintenance,22220.41
+2025-07,B04,Bar,Staff Salaries,138302.93
+2025-07,B04,Bar,Rent,88722.17
+2025-07,B04,Bar,Utilities,45416.02
+2025-07,B04,Bar,Supplies & Maintenance,20518.89
+2025-07,B05,Gym,Staff Salaries,192229.08
+2025-07,B05,Gym,Rent,115017.45
+2025-07,B05,Gym,Utilities,55227.01
+2025-07,B05,Gym,Supplies & Maintenance,26764.87
+2025-07,B05,Bar,Staff Salaries,166458.93
+2025-07,B05,Bar,Rent,103720.68
+2025-07,B05,Bar,Utilities,53003.24
+2025-07,B05,Bar,Supplies & Maintenance,24866.94
+2025-08,B01,Gym,Staff Salaries,120096.28
+2025-08,B01,Gym,Rent,79272.59
+2025-08,B01,Gym,Utilities,37104.31
+2025-08,B01,Gym,Supplies & Maintenance,16492.69
+2025-08,B01,Bar,Staff Salaries,119552.4
+2025-08,B01,Bar,Rent,68169.81
+2025-08,B01,Bar,Utilities,34870.13
+2025-08,B01,Bar,Supplies & Maintenance,16060.18
+2025-08,B02,Gym,Staff Salaries,136787.08
+2025-08,B02,Gym,Rent,93092.98
+2025-08,B02,Gym,Utilities,40437.1
+2025-08,B02,Gym,Supplies & Maintenance,19445.66
+2025-08,B02,Bar,Staff Salaries,120390.98
+2025-08,B02,Bar,Rent,81573.61
+2025-08,B02,Bar,Utilities,42379.34
+2025-08,B02,Bar,Supplies & Maintenance,18356.04
+2025-08,B03,Gym,Staff Salaries,76597.61
+2025-08,B03,Gym,Rent,47007.38
+2025-08,B03,Gym,Utilities,24226.26
+2025-08,B03,Gym,Supplies & Maintenance,11443.74
+2025-08,B03,Bar,Staff Salaries,99575.66
+2025-08,B03,Bar,Rent,60420.88
+2025-08,B03,Bar,Utilities,29729.82
+2025-08,B03,Bar,Supplies & Maintenance,13929.01
+2025-08,B04,Gym,Staff Salaries,158239.04
+2025-08,B04,Gym,Rent,88780.24
+2025-08,B04,Gym,Utilities,46253.89
+2025-08,B04,Gym,Supplies & Maintenance,20988.68
+2025-08,B04,Bar,Staff Salaries,140639.61
+2025-08,B04,Bar,Rent,82491.3
+2025-08,B04,Bar,Utilities,42108.61
+2025-08,B04,Bar,Supplies & Maintenance,20123.21
+2025-08,B05,Gym,Staff Salaries,197238.48
+2025-08,B05,Gym,Rent,103951.28
+2025-08,B05,Gym,Utilities,58089.61
+2025-08,B05,Gym,Supplies & Maintenance,27093.72
+2025-08,B05,Bar,Staff Salaries,177279.46
+2025-08,B05,Bar,Rent,109850.97
+2025-08,B05,Bar,Utilities,51164.57
+2025-08,B05,Bar,Supplies & Maintenance,24902.79
+2025-09,B01,Gym,Staff Salaries,115178.94
+2025-09,B01,Gym,Rent,77751.69
+2025-09,B01,Gym,Utilities,37350.99
+2025-09,B01,Gym,Supplies & Maintenance,16552.68
+2025-09,B01,Bar,Staff Salaries,124955.96
+2025-09,B01,Bar,Rent,78327.97
+2025-09,B01,Bar,Utilities,38714.26
+2025-09,B01,Bar,Supplies & Maintenance,16207.28
+2025-09,B02,Gym,Staff Salaries,142445.71
+2025-09,B02,Gym,Rent,83079.04
+2025-09,B02,Gym,Utilities,39937.71
+2025-09,B02,Gym,Supplies & Maintenance,19497.62
+2025-09,B02,Bar,Staff Salaries,120633.02
+2025-09,B02,Bar,Rent,80514.8
+2025-09,B02,Bar,Utilities,43935.36
+2025-09,B02,Bar,Supplies & Maintenance,19667.34
+2025-09,B03,Gym,Staff Salaries,81037.05
+2025-09,B03,Gym,Rent,47673.71
+2025-09,B03,Gym,Utilities,26170.46
+2025-09,B03,Gym,Supplies & Maintenance,11254.21
+2025-09,B03,Bar,Staff Salaries,93396.96
+2025-09,B03,Bar,Rent,60549.75
+2025-09,B03,Bar,Utilities,30071.0
+2025-09,B03,Bar,Supplies & Maintenance,13673.77
+2025-09,B04,Gym,Staff Salaries,158390.12
+2025-09,B04,Gym,Rent,101751.42
+2025-09,B04,Gym,Utilities,49514.85
+2025-09,B04,Gym,Supplies & Maintenance,22781.07
+2025-09,B04,Bar,Staff Salaries,136835.43
+2025-09,B04,Bar,Rent,89042.52
+2025-09,B04,Bar,Utilities,42086.04
+2025-09,B04,Bar,Supplies & Maintenance,19513.14
+2025-09,B05,Gym,Staff Salaries,182769.7
+2025-09,B05,Gym,Rent,115053.7
+2025-09,B05,Gym,Utilities,60123.81
+2025-09,B05,Gym,Supplies & Maintenance,27752.77
+2025-09,B05,Bar,Staff Salaries,165566.89
+2025-09,B05,Bar,Rent,103928.13
+2025-09,B05,Bar,Utilities,48130.02
+2025-09,B05,Bar,Supplies & Maintenance,24487.95
+2025-10,B01,Gym,Staff Salaries,127030.5
+2025-10,B01,Gym,Rent,79744.14
+2025-10,B01,Gym,Utilities,39047.6
+2025-10,B01,Gym,Supplies & Maintenance,17305.32
+2025-10,B01,Bar,Staff Salaries,114435.42
+2025-10,B01,Bar,Rent,71708.87
+2025-10,B01,Bar,Utilities,36518.97
+2025-10,B01,Bar,Supplies & Maintenance,17185.41
+2025-10,B02,Gym,Staff Salaries,148652.98
+2025-10,B02,Gym,Rent,91128.18
+2025-10,B02,Gym,Utilities,44195.0
+2025-10,B02,Gym,Supplies & Maintenance,21046.05
+2025-10,B02,Bar,Staff Salaries,134327.94
+2025-10,B02,Bar,Rent,87148.06
+2025-10,B02,Bar,Utilities,40963.88
+2025-10,B02,Bar,Supplies & Maintenance,20979.78
+2025-10,B03,Gym,Staff Salaries,79142.88
+2025-10,B03,Gym,Rent,46020.82
+2025-10,B03,Gym,Utilities,24602.81
+2025-10,B03,Gym,Supplies & Maintenance,12002.53
+2025-10,B03,Bar,Staff Salaries,93691.57
+2025-10,B03,Bar,Rent,58884.64
+2025-10,B03,Bar,Utilities,28621.99
+2025-10,B03,Bar,Supplies & Maintenance,13914.61
+2025-10,B04,Gym,Staff Salaries,162987.93
+2025-10,B04,Gym,Rent,100469.91
+2025-10,B04,Gym,Utilities,50877.25
+2025-10,B04,Gym,Supplies & Maintenance,23880.94
+2025-10,B04,Bar,Staff Salaries,139293.44
+2025-10,B04,Bar,Rent,87752.82
+2025-10,B04,Bar,Utilities,43403.88
+2025-10,B04,Bar,Supplies & Maintenance,21267.59
+2025-10,B05,Gym,Staff Salaries,176706.98
+2025-10,B05,Gym,Rent,114340.36
+2025-10,B05,Gym,Utilities,58672.23
+2025-10,B05,Gym,Supplies & Maintenance,27293.53
+2025-10,B05,Bar,Staff Salaries,165915.48
+2025-10,B05,Bar,Rent,107768.85
+2025-10,B05,Bar,Utilities,54374.72
+2025-10,B05,Bar,Supplies & Maintenance,24918.03
+2025-11,B01,Gym,Staff Salaries,119950.06
+2025-11,B01,Gym,Rent,73593.54
+2025-11,B01,Gym,Utilities,35658.16
+2025-11,B01,Gym,Supplies & Maintenance,18197.94
+2025-11,B01,Bar,Staff Salaries,119117.88
+2025-11,B01,Bar,Rent,73851.91
+2025-11,B01,Bar,Utilities,38867.56
+2025-11,B01,Bar,Supplies & Maintenance,18779.76
+2025-11,B02,Gym,Staff Salaries,143431.53
+2025-11,B02,Gym,Rent,84706.81
+2025-11,B02,Gym,Utilities,43087.29
+2025-11,B02,Gym,Supplies & Maintenance,20347.91
+2025-11,B02,Bar,Staff Salaries,133974.49
+2025-11,B02,Bar,Rent,85249.91
+2025-11,B02,Bar,Utilities,41963.02
+2025-11,B02,Bar,Supplies & Maintenance,20757.61
+2025-11,B03,Gym,Staff Salaries,80566.42
+2025-11,B03,Gym,Rent,50263.67
+2025-11,B03,Gym,Utilities,24496.93
+2025-11,B03,Gym,Supplies & Maintenance,10573.24
+2025-11,B03,Bar,Staff Salaries,92814.23
+2025-11,B03,Bar,Rent,57773.03
+2025-11,B03,Bar,Utilities,28629.23
+2025-11,B03,Bar,Supplies & Maintenance,13850.76
+2025-11,B04,Gym,Staff Salaries,164442.8
+2025-11,B04,Gym,Rent,94140.27
+2025-11,B04,Gym,Utilities,49726.31
+2025-11,B04,Gym,Supplies & Maintenance,23818.64
+2025-11,B04,Bar,Staff Salaries,143145.82
+2025-11,B04,Bar,Rent,86282.48
+2025-11,B04,Bar,Utilities,43106.2
+2025-11,B04,Bar,Supplies & Maintenance,21459.08
+2025-11,B05,Gym,Staff Salaries,176134.46
+2025-11,B05,Gym,Rent,109121.12
+2025-11,B05,Gym,Utilities,53567.19
+2025-11,B05,Gym,Supplies & Maintenance,26292.87
+2025-11,B05,Bar,Staff Salaries,166978.45
+2025-11,B05,Bar,Rent,101258.65
+2025-11,B05,Bar,Utilities,52482.11
+2025-11,B05,Bar,Supplies & Maintenance,26206.64
+2025-12,B01,Gym,Staff Salaries,122382.46
+2025-12,B01,Gym,Rent,67267.66
+2025-12,B01,Gym,Utilities,37225.08
+2025-12,B01,Gym,Supplies & Maintenance,17714.21
+2025-12,B01,Bar,Staff Salaries,123681.25
+2025-12,B01,Bar,Rent,71406.97
+2025-12,B01,Bar,Utilities,37154.94
+2025-12,B01,Bar,Supplies & Maintenance,16256.95
+2025-12,B02,Gym,Staff Salaries,138608.21
+2025-12,B02,Gym,Rent,90607.93
+2025-12,B02,Gym,Utilities,46934.9
+2025-12,B02,Gym,Supplies & Maintenance,20619.07
+2025-12,B02,Bar,Staff Salaries,134593.28
+2025-12,B02,Bar,Rent,88698.26
+2025-12,B02,Bar,Utilities,44028.52
+2025-12,B02,Bar,Supplies & Maintenance,19643.15
+2025-12,B03,Gym,Staff Salaries,82057.36
+2025-12,B03,Gym,Rent,46847.16
+2025-12,B03,Gym,Utilities,24236.25
+2025-12,B03,Gym,Supplies & Maintenance,12091.68
+2025-12,B03,Bar,Staff Salaries,93461.83
+2025-12,B03,Bar,Rent,61484.48
+2025-12,B03,Bar,Utilities,29789.52
+2025-12,B03,Bar,Supplies & Maintenance,14823.89
+2025-12,B04,Gym,Staff Salaries,154161.42
+2025-12,B04,Gym,Rent,94689.21
+2025-12,B04,Gym,Utilities,49384.82
+2025-12,B04,Gym,Supplies & Maintenance,23274.99
+2025-12,B04,Bar,Staff Salaries,151062.41
+2025-12,B04,Bar,Rent,84293.0
+2025-12,B04,Bar,Utilities,41554.76
+2025-12,B04,Bar,Supplies & Maintenance,20041.29
+2025-12,B05,Gym,Staff Salaries,186619.92
+2025-12,B05,Gym,Rent,110115.68
+2025-12,B05,Gym,Utilities,58381.57
+2025-12,B05,Gym,Supplies & Maintenance,27874.04
+2025-12,B05,Bar,Staff Salaries,177629.05
+2025-12,B05,Bar,Rent,104556.09
+2025-12,B05,Bar,Utilities,55089.18
+2025-12,B05,Bar,Supplies & Maintenance,26405.63
+2026-01,B01,Gym,Staff Salaries,116605.11
+2026-01,B01,Gym,Rent,70806.83
+2026-01,B01,Gym,Utilities,35376.74
+2026-01,B01,Gym,Supplies & Maintenance,16814.62
+2026-01,B01,Bar,Staff Salaries,114650.14
+2026-01,B01,Bar,Rent,72037.34
+2026-01,B01,Bar,Utilities,39749.52
+2026-01,B01,Bar,Supplies & Maintenance,15183.09
+2026-01,B02,Gym,Staff Salaries,144603.54
+2026-01,B02,Gym,Rent,81308.13
+2026-01,B02,Gym,Utilities,43447.84
+2026-01,B02,Gym,Supplies & Maintenance,19041.75
+2026-01,B02,Bar,Staff Salaries,127836.6
+2026-01,B02,Bar,Rent,85912.4
+2026-01,B02,Bar,Utilities,40537.02
+2026-01,B02,Bar,Supplies & Maintenance,18269.62
+2026-01,B03,Gym,Staff Salaries,78687.69
+2026-01,B03,Gym,Rent,47782.66
+2026-01,B03,Gym,Utilities,24531.24
+2026-01,B03,Gym,Supplies & Maintenance,11386.91
+2026-01,B03,Bar,Staff Salaries,98938.1
+2026-01,B03,Bar,Rent,61818.7
+2026-01,B03,Bar,Utilities,28420.51
+2026-01,B03,Bar,Supplies & Maintenance,14437.05
+2026-01,B04,Gym,Staff Salaries,157785.52
+2026-01,B04,Gym,Rent,101004.18
+2026-01,B04,Gym,Utilities,51094.03
+2026-01,B04,Gym,Supplies & Maintenance,22597.33
+2026-01,B04,Bar,Staff Salaries,140411.43
+2026-01,B04,Bar,Rent,88209.4
+2026-01,B04,Bar,Utilities,42776.39
+2026-01,B04,Bar,Supplies & Maintenance,21119.49
+2026-01,B05,Gym,Staff Salaries,190193.05
+2026-01,B05,Gym,Rent,116554.31
+2026-01,B05,Gym,Utilities,57165.66
+2026-01,B05,Gym,Supplies & Maintenance,26633.0
+2026-01,B05,Bar,Staff Salaries,172648.72
+2026-01,B05,Bar,Rent,106641.07
+2026-01,B05,Bar,Utilities,49385.8
+2026-01,B05,Bar,Supplies & Maintenance,22978.18
+2026-02,B01,Gym,Staff Salaries,119612.27
+2026-02,B01,Gym,Rent,75271.21
+2026-02,B01,Gym,Utilities,38027.41
+2026-02,B01,Gym,Supplies & Maintenance,16597.67
+2026-02,B01,Bar,Staff Salaries,113115.54
+2026-02,B01,Bar,Rent,75130.42
+2026-02,B01,Bar,Utilities,39165.29
+2026-02,B01,Bar,Supplies & Maintenance,17953.9
+2026-02,B02,Gym,Staff Salaries,134739.09
+2026-02,B02,Gym,Rent,83267.1
+2026-02,B02,Gym,Utilities,40054.07
+2026-02,B02,Gym,Supplies & Maintenance,19366.27
+2026-02,B02,Bar,Staff Salaries,122589.17
+2026-02,B02,Bar,Rent,86727.16
+2026-02,B02,Bar,Utilities,41946.88
+2026-02,B02,Bar,Supplies & Maintenance,19705.41
+2026-02,B03,Gym,Staff Salaries,77426.53
+2026-02,B03,Gym,Rent,48286.93
+2026-02,B03,Gym,Utilities,24745.77
+2026-02,B03,Gym,Supplies & Maintenance,10814.58
+2026-02,B03,Bar,Staff Salaries,98701.19
+2026-02,B03,Bar,Rent,59087.88
+2026-02,B03,Bar,Utilities,31806.48
+2026-02,B03,Bar,Supplies & Maintenance,13057.78
+2026-02,B04,Gym,Staff Salaries,155047.46
+2026-02,B04,Gym,Rent,97244.51
+2026-02,B04,Gym,Utilities,51558.08
+2026-02,B04,Gym,Supplies & Maintenance,21553.7
+2026-02,B04,Bar,Staff Salaries,128416.01
+2026-02,B04,Bar,Rent,86414.63
+2026-02,B04,Bar,Utilities,48373.03
+2026-02,B04,Bar,Supplies & Maintenance,21405.17
+2026-02,B05,Gym,Staff Salaries,186325.45
+2026-02,B05,Gym,Rent,124662.54
+2026-02,B05,Gym,Utilities,61009.87
+2026-02,B05,Gym,Supplies & Maintenance,26555.93
+2026-02,B05,Bar,Staff Salaries,166416.2
+2026-02,B05,Bar,Rent,99555.87
+2026-02,B05,Bar,Utilities,54351.49
+2026-02,B05,Bar,Supplies & Maintenance,26898.29
+2026-03,B01,Gym,Staff Salaries,123033.5
+2026-03,B01,Gym,Rent,76675.38
+2026-03,B01,Gym,Utilities,37332.71
+2026-03,B01,Gym,Supplies & Maintenance,16115.21
+2026-03,B01,Bar,Staff Salaries,121416.95
+2026-03,B01,Bar,Rent,73648.16
+2026-03,B01,Bar,Utilities,35874.08
+2026-03,B01,Bar,Supplies & Maintenance,17439.31
+2026-03,B02,Gym,Staff Salaries,131245.77
+2026-03,B02,Gym,Rent,82198.23
+2026-03,B02,Gym,Utilities,44174.97
+2026-03,B02,Gym,Supplies & Maintenance,19749.42
+2026-03,B02,Bar,Staff Salaries,132943.02
+2026-03,B02,Bar,Rent,84882.85
+2026-03,B02,Bar,Utilities,41308.66
+2026-03,B02,Bar,Supplies & Maintenance,19417.44
+2026-03,B03,Gym,Staff Salaries,82991.31
+2026-03,B03,Gym,Rent,48646.35
+2026-03,B03,Gym,Utilities,25809.57
+2026-03,B03,Gym,Supplies & Maintenance,11458.22
+2026-03,B03,Bar,Staff Salaries,92583.54
+2026-03,B03,Bar,Rent,61698.76
+2026-03,B03,Bar,Utilities,30056.31
+2026-03,B03,Bar,Supplies & Maintenance,13539.77
+2026-03,B04,Gym,Staff Salaries,159018.12
+2026-03,B04,Gym,Rent,94967.64
+2026-03,B04,Gym,Utilities,47669.8
+2026-03,B04,Gym,Supplies & Maintenance,24113.72
+2026-03,B04,Bar,Staff Salaries,147283.94
+2026-03,B04,Bar,Rent,87571.35
+2026-03,B04,Bar,Utilities,42671.51
+2026-03,B04,Bar,Supplies & Maintenance,19856.41
+2026-03,B05,Gym,Staff Salaries,188001.28
+2026-03,B05,Gym,Rent,119062.87
+2026-03,B05,Gym,Utilities,60642.8
+2026-03,B05,Gym,Supplies & Maintenance,27287.93
+2026-03,B05,Bar,Staff Salaries,164608.3
+2026-03,B05,Bar,Rent,99290.54
+2026-03,B05,Bar,Utilities,55132.67
+2026-03,B05,Bar,Supplies & Maintenance,22239.23
+2026-04,B01,Gym,Staff Salaries,113647.76
+2026-04,B01,Gym,Rent,75126.32
+2026-04,B01,Gym,Utilities,42234.19
+2026-04,B01,Gym,Supplies & Maintenance,18870.65
+2026-04,B01,Bar,Staff Salaries,120848.92
+2026-04,B01,Bar,Rent,74988.68
+2026-04,B01,Bar,Utilities,41698.42
+2026-04,B01,Bar,Supplies & Maintenance,18025.36
+2026-04,B02,Gym,Staff Salaries,144746.74
+2026-04,B02,Gym,Rent,82793.79
+2026-04,B02,Gym,Utilities,44760.99
+2026-04,B02,Gym,Supplies & Maintenance,19750.46
+2026-04,B02,Bar,Staff Salaries,140763.27
+2026-04,B02,Bar,Rent,93353.86
+2026-04,B02,Bar,Utilities,45199.54
+2026-04,B02,Bar,Supplies & Maintenance,20009.22
+2026-04,B03,Gym,Staff Salaries,74498.41
+2026-04,B03,Gym,Rent,46701.21
+2026-04,B03,Gym,Utilities,27779.34
+2026-04,B03,Gym,Supplies & Maintenance,11480.18
+2026-04,B03,Bar,Staff Salaries,94391.48
+2026-04,B03,Bar,Rent,61366.37
+2026-04,B03,Bar,Utilities,30209.42
+2026-04,B03,Bar,Supplies & Maintenance,13573.64
+2026-04,B04,Gym,Staff Salaries,162533.68
+2026-04,B04,Gym,Rent,95052.43
+2026-04,B04,Gym,Utilities,51240.46
+2026-04,B04,Gym,Supplies & Maintenance,21499.34
+2026-04,B04,Bar,Staff Salaries,137299.0
+2026-04,B04,Bar,Rent,93206.38
+2026-04,B04,Bar,Utilities,46092.06
+2026-04,B04,Bar,Supplies & Maintenance,20333.62
+2026-04,B05,Gym,Staff Salaries,183884.67
+2026-04,B05,Gym,Rent,111978.0
+2026-04,B05,Gym,Utilities,61252.23
+2026-04,B05,Gym,Supplies & Maintenance,27745.89
+2026-04,B05,Bar,Staff Salaries,160599.28
+2026-04,B05,Bar,Rent,105410.9
+2026-04,B05,Bar,Utilities,58311.33
+2026-04,B05,Bar,Supplies & Maintenance,24071.06
+2026-05,B01,Gym,Staff Salaries,112698.99
+2026-05,B01,Gym,Rent,70008.08
+2026-05,B01,Gym,Utilities,37929.84
+2026-05,B01,Gym,Supplies & Maintenance,18049.95
+2026-05,B01,Bar,Staff Salaries,117903.47
+2026-05,B01,Bar,Rent,70720.81
+2026-05,B01,Bar,Utilities,41621.42
+2026-05,B01,Bar,Supplies & Maintenance,17170.02
+2026-05,B02,Gym,Staff Salaries,140182.67
+2026-05,B02,Gym,Rent,85554.49
+2026-05,B02,Gym,Utilities,48763.28
+2026-05,B02,Gym,Supplies & Maintenance,20474.77
+2026-05,B02,Bar,Staff Salaries,137373.82
+2026-05,B02,Bar,Rent,92848.31
+2026-05,B02,Bar,Utilities,44446.85
+2026-05,B02,Bar,Supplies & Maintenance,20488.52
+2026-05,B03,Gym,Staff Salaries,73734.64
+2026-05,B03,Gym,Rent,47076.83
+2026-05,B03,Gym,Utilities,25953.87
+2026-05,B03,Gym,Supplies & Maintenance,11042.95
+2026-05,B03,Bar,Staff Salaries,97807.53
+2026-05,B03,Bar,Rent,57168.84
+2026-05,B03,Bar,Utilities,32867.94
+2026-05,B03,Bar,Supplies & Maintenance,13722.07
+2026-05,B04,Gym,Staff Salaries,161471.02
+2026-05,B04,Gym,Rent,101210.14
+2026-05,B04,Gym,Utilities,53000.88
+2026-05,B04,Gym,Supplies & Maintenance,22357.66
+2026-05,B04,Bar,Staff Salaries,145339.73
+2026-05,B04,Bar,Rent,88466.83
+2026-05,B04,Bar,Utilities,47645.2
+2026-05,B04,Bar,Supplies & Maintenance,19647.61
+2026-05,B05,Gym,Staff Salaries,179560.29
+2026-05,B05,Gym,Rent,110190.71
+2026-05,B05,Gym,Utilities,61466.38
+2026-05,B05,Gym,Supplies & Maintenance,27181.79
+2026-05,B05,Bar,Staff Salaries,189287.26
+2026-05,B05,Bar,Rent,110925.09
+2026-05,B05,Bar,Utilities,56078.31
+2026-05,B05,Bar,Supplies & Maintenance,26010.2
+2026-06,B01,Gym,Staff Salaries,129808.78
+2026-06,B01,Gym,Rent,75734.87
+2026-06,B01,Gym,Utilities,37802.89
+2026-06,B01,Gym,Supplies & Maintenance,16030.21
+2026-06,B01,Bar,Staff Salaries,112672.79
+2026-06,B01,Bar,Rent,76474.07
+2026-06,B01,Bar,Utilities,35820.25
+2026-06,B01,Bar,Supplies & Maintenance,17371.61
+2026-06,B02,Gym,Staff Salaries,144864.45
+2026-06,B02,Gym,Rent,89178.76
+2026-06,B02,Gym,Utilities,43164.59
+2026-06,B02,Gym,Supplies & Maintenance,19328.6
+2026-06,B02,Bar,Staff Salaries,135998.56
+2026-06,B02,Bar,Rent,84736.55
+2026-06,B02,Bar,Utilities,43269.05
+2026-06,B02,Bar,Supplies & Maintenance,21270.21
+2026-06,B03,Gym,Staff Salaries,80919.6
+2026-06,B03,Gym,Rent,50739.38
+2026-06,B03,Gym,Utilities,23316.29
+2026-06,B03,Gym,Supplies & Maintenance,11767.75
+2026-06,B03,Bar,Staff Salaries,104281.6
+2026-06,B03,Bar,Rent,60519.55
+2026-06,B03,Bar,Utilities,29920.54
+2026-06,B03,Bar,Supplies & Maintenance,14970.48
+2026-06,B04,Gym,Staff Salaries,171350.63
+2026-06,B04,Gym,Rent,101412.69
+2026-06,B04,Gym,Utilities,47276.29
+2026-06,B04,Gym,Supplies & Maintenance,22454.9
+2026-06,B04,Bar,Staff Salaries,133961.32
+2026-06,B04,Bar,Rent,82284.36
+2026-06,B04,Bar,Utilities,44330.27
+2026-06,B04,Bar,Supplies & Maintenance,19770.38
+2026-06,B05,Gym,Staff Salaries,171000.13
+2026-06,B05,Gym,Rent,119121.44
+2026-06,B05,Gym,Utilities,57826.98
+2026-06,B05,Gym,Supplies & Maintenance,26582.47
+2026-06,B05,Bar,Staff Salaries,173891.77
+2026-06,B05,Bar,Rent,105855.39
+2026-06,B05,Bar,Utilities,51760.21
+2026-06,B05,Bar,Supplies & Maintenance,23638.21

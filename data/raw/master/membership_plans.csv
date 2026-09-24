@@ -1,0 +1,6 @@
+plan_id,plan_name,duration_months,price
+P1,Monthly,1,1500
+P2,Student Monthly,1,1100
+P3,Quarterly,3,4000
+P4,Semi-Annual,6,7500
+P5,Annual,12,13500
