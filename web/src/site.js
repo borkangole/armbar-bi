@@ -49,7 +49,7 @@ function initMotion() {
 
   // hero intro
   const intro = gsap.timeline({ delay: 0.2 });
-  intro.from("#heroTitle .line > span", { yPercent: 120, rotateX: -80, opacity: 0, duration: 1.2, ease: "power4.out", stagger: 0.12, transformPerspective: 700 })
+  intro.from("#heroTitle .line > span", { yPercent: 115, duration: 1.2, ease: "power4.out", stagger: 0.12 })
        .from(".hero .fade-up", { y: 40, opacity: 0, duration: 0.9, ease: "power3.out", stagger: 0.1 }, "-=0.7");
 
   // hero tilts back into the distance as you leave it
@@ -59,11 +59,11 @@ function initMotion() {
   });
   gsap.to(".hero .bg", { yPercent: 18, scale: 1.06, ease: "none", scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: 1.2 } });
 
-  // headings flip up in 3D
-  $$(".flip").forEach((h) => gsap.from(h, {
-    rotateX: -95, y: 70, opacity: 0, transformOrigin: "50% 100%", transformPerspective: 800, duration: 1.1, ease: "power3.out",
-    scrollTrigger: { trigger: h, start: "top 88%", toggleActions: "play none none reverse" },
-  }));
+  // headings wipe up from a mask (no 3D tilt, so no distortion mid-animation)
+  $$(".flip").forEach((h) => gsap.fromTo(h,
+    { clipPath: "inset(0 0 100% 0)", y: 40 },
+    { clipPath: "inset(0 0 0% 0)", y: 0, duration: 1.1, ease: "power4.out",
+      scrollTrigger: { trigger: h, start: "top 88%", toggleActions: "play none none reverse" } }));
   $$("section .fade-up").forEach((el) => gsap.from(el, {
     y: 50, opacity: 0, duration: 0.9, ease: "power3.out",
     scrollTrigger: { trigger: el, start: "top 92%", toggleActions: "play none none reverse" },
@@ -80,34 +80,41 @@ function initMotion() {
       scrollTrigger: { trigger: tile, start: "top bottom", end: "bottom top", scrub: 1.2 } });
   });
 
-  // business-unit cards come out of the depth
-  gsap.from(".unit", {
-    x: 120, rotateY: -45, z: -200, opacity: 0, transformPerspective: 900, stagger: 0.15, ease: "none",
-    scrollTrigger: { trigger: ".units", start: "top 95%", end: "top 55%", scrub: 1.2 },
+  // business-unit cards: one clean, time-based reveal (not tied to scroll position)
+  gsap.set(".unit", { clipPath: "inset(0 100% 0 0)", y: 30 });
+  gsap.set(".unit h3, .unit p", { opacity: 0, y: 14 });
+  ScrollTrigger.create({
+    trigger: ".units", start: "top 80%", once: true,
+    onEnter: () => {
+      const tl = gsap.timeline();
+      tl.to(".unit", { clipPath: "inset(0 0% 0 0)", y: 0, duration: 1.0, ease: "power4.out", stagger: 0.18 })
+        .to(".unit h3, .unit p", { opacity: 1, y: 0, duration: 0.7, ease: "power3.out", stagger: 0.08 }, 0.35);
+    },
   });
 
   const mm = gsap.matchMedia();
-  // desktop: pinned horizontal 3D carousel of the five questions
+  // desktop: pinned horizontal track. Cards stay flat and only the track moves (GPU transform),
+  // the card nearest the centre is highlighted - computed from progress, no layout measuring.
   mm.add("(min-width: 961px)", () => {
     const track = $("#track"), cards = $$(".qcard");
+    let step = 0, active = -1;
+    const measure = () => { step = cards[1].offsetLeft - cards[0].offsetLeft; };
     const dist = () => track.scrollWidth - innerWidth;
-    const coverflow = () => {
-      const mid = innerWidth / 2;
-      cards.forEach((c) => {
-        const r = c.getBoundingClientRect(), off = (r.left + r.width / 2 - mid) / innerWidth;
-        gsap.set(c, { rotateY: clamp(-off * 70, -55, 55), z: -Math.abs(off) * 420,
-                      opacity: clamp(1.2 - Math.abs(off) * 0.9, 0.45, 1) });
-      });
+    const setActive = (x) => {
+      const i = clamp(Math.round(-x / step), 0, cards.length - 1);
+      if (i !== active) { cards.forEach((c, k) => c.classList.toggle("is-active", k === i)); active = i; }
     };
+    measure(); setActive(0);
     const tw = gsap.to(track, {
-      x: () => -dist(), ease: "none", onUpdate: coverflow,
-      scrollTrigger: { trigger: ".qs", start: "top top", end: () => "+=" + dist(), pin: true, scrub: 1.2, invalidateOnRefresh: true, onRefresh: coverflow },
+      x: () => -dist(), ease: "none", force3D: true,
+      onUpdate: () => setActive(gsap.getProperty(track, "x")),
+      scrollTrigger: { trigger: ".qs", start: "top top", end: () => "+=" + dist() * 1.1, pin: true, scrub: 0.8,
+                       anticipatePin: 1, invalidateOnRefresh: true, onRefresh: measure },
     });
-    coverflow();
-    return () => tw.kill();
+    return () => { tw.kill(); cards.forEach((c) => c.classList.remove("is-active")); };
   });
   mm.add("(max-width: 960px)", () => {
-    $$(".qcard").forEach((c) => gsap.from(c, { rotateX: -50, y: 60, opacity: 0, transformPerspective: 800, duration: 0.9, ease: "power3.out",
+    $$(".qcard").forEach((c) => gsap.from(c, { y: 50, opacity: 0, duration: 0.8, ease: "power3.out",
       scrollTrigger: { trigger: c, start: "top 92%", toggleActions: "play none none reverse" } }));
   });
 
@@ -117,14 +124,14 @@ function initMotion() {
     scaleX: 1, ease: "none", scrollTrigger: { trigger: "#route", start: "top 85%", end: "top 35%", scrub: 1.2 },
   });
   gsap.from(".stop", {
-    scale: 0.4, rotateX: -90, y: 30, opacity: 0, transformPerspective: 700, stagger: 0.18, ease: "none",
+    y: 30, opacity: 0, stagger: 0.18, ease: "none",
     scrollTrigger: { trigger: "#route", start: "top 85%", end: "top 35%", scrub: 1.2 },
   });
   if (narrow()) gsap.set(".route .rail i", { transformOrigin: "50% 0%" });
 
   // final title rushes in from depth
-  gsap.fromTo("#finalTitle", { scale: 2.2, opacity: 0, rotateX: 25, transformPerspective: 900 },
-    { scale: 1, opacity: 1, rotateX: 0, ease: "none", scrollTrigger: { trigger: ".final", start: "top 90%", end: "center 60%", scrub: 1.2 } });
+  gsap.fromTo("#finalTitle", { scale: 1.35, opacity: 0 },
+    { scale: 1, opacity: 1, ease: "none", scrollTrigger: { trigger: ".final", start: "top 90%", end: "center 60%", scrub: 1.2 } });
   gsap.fromTo(".final .bg", { scale: 1.25 }, { scale: 1, ease: "none", scrollTrigger: { trigger: ".final", start: "top bottom", end: "bottom bottom", scrub: 1.2 } });
 
   // hover: tiles lean toward the cursor (inner photo layer, so it doesn't fight the scroll animation)

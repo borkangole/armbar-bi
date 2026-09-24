@@ -107,7 +107,7 @@
     .about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 72px; align-items: center; }
     .about p { color: var(--grey); margin: 20px 0 0; max-width: 50ch; }
     .units { display: grid; gap: 18px; }
-    .unit { border-left: 4px solid var(--red); background: #151515; padding: 30px 30px; }
+    .unit { border-left: 4px solid var(--red); background: #151515; padding: 30px 30px; will-change: clip-path, transform; }
     .unit h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; margin: 0 0 6px; line-height: 1; }
     .unit p { margin: 0; font-size: 14px; }
 
@@ -115,11 +115,14 @@
     .qs { overflow: hidden; }
     .qs .content { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 100px 0; }
     .qs .head { margin-bottom: 48px; }
-    .track-wrap { perspective: 1400px; }
-    .track { display: flex; gap: 28px; padding: 0 calc(50vw - 190px); transform-style: preserve-3d; will-change: transform; }
+    .track { display: flex; gap: 28px; padding: 0 calc(50vw - 190px); will-change: transform; }
     .qcard { flex: 0 0 380px; min-height: 360px; padding: 34px 30px; border: 1px solid var(--line); border-radius: 8px;
              background: linear-gradient(160deg, #1d1d1d, #0f0f0f);
-             display: flex; flex-direction: column; justify-content: space-between; transform-style: preserve-3d; will-change: transform; }
+             display: flex; flex-direction: column; justify-content: space-between;
+             opacity: .4; transform: scale(.93);
+             transition: opacity .5s ease, transform .6s cubic-bezier(.2,.8,.2,1), border-color .5s ease, box-shadow .5s ease; }
+    .qcard.is-active { opacity: 1; transform: scale(1); border-color: var(--red);
+                       box-shadow: 0 30px 60px -30px rgba(224,24,45,.45); }
     .qcard .n { font-family: var(--display); font-size: 88px; line-height: .9; color: var(--red); }
     .qcard h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; line-height: 1; margin: 0 0 10px; }
     .qcard p { color: var(--grey); margin: 0; font-size: 15px; }
@@ -155,7 +158,7 @@
       .units { grid-template-columns: 1fr; }
       .qs .content { min-height: 0; }
       .track { flex-direction: column; padding: 0 28px; gap: 16px; }
-      .qcard { flex: none; min-height: 0; }
+      .qcard { flex: none; min-height: 0; opacity: 1; transform: none; }
       .qcard .n { font-size: 56px; }
       .route { grid-template-columns: 1fr; gap: 22px; }
       .route .rail { left: 9px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; }
