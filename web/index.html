@@ -261,7 +261,7 @@
         <a href="#about">About</a>
         <a href="#questions">Questions</a>
         <a href="#branches">Branches</a>
-        <a class="btn btn-red" href="login.html" data-login>Log in</a>
+        <a class="btn btn-red" href="/dashboard" data-login>Log in</a>
       </div>
     </div>
     <div class="progress" id="progress"></div>
@@ -279,7 +279,7 @@
         </h1>
         <p class="lede fade-up">One dashboard for ArmBar Gym and ArmBar Bar. See how each branch performs, compare the two businesses, and find what needs attention first.</p>
         <div class="cta fade-up">
-          <a class="btn btn-red" href="dashboard.html">Log in
+          <a class="btn btn-red" href="/dashboard">Log in
             <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
           </a>
           <a class="btn btn-line" href="#questions">What it answers</a>
@@ -295,16 +295,16 @@
           <h2 class="display flip">Built for <span class="red">decisions.</span></h2>
         </div>
         <div class="tiles">
-          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/miguel-bw.webp" alt="ArmBar gym member" style="object-position: 50% 20%"></div>
+          <a class="tile" href="/dashboard"><div class="ph"><img src="imgs/miguel-bw.webp" alt="ArmBar gym member" style="object-position: 50% 20%"></div>
             <div class="t"><span class="n">BQ1</span><h3>Overall performance</h3><p>Revenue and profit over time</p></div></a>
-          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/img4-portrait-bw.webp" alt=""></div>
+          <a class="tile" href="/dashboard"><div class="ph"><img src="imgs/img4-portrait-bw.webp" alt=""></div>
             <div class="t"><span class="n">BQ2</span><h3>Branch comparison</h3><p>Who's ahead, who needs help</p></div></a>
-          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/img1-bw.webp" alt="" style="object-position: 30% center"></div>
+          <a class="tile" href="/dashboard"><div class="ph"><img src="imgs/img1-bw.webp" alt="" style="object-position: 30% center"></div>
             <div class="t"><span class="n">BQ3</span><h3>Gym vs Bar</h3><p>Two businesses, side by side</p></div></a>
-          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/img2-bw.webp" alt="" style="object-position: 62% center"></div>
+          <a class="tile" href="/dashboard"><div class="ph"><img src="imgs/img2-bw.webp" alt="" style="object-position: 62% center"></div>
             <div class="t"><span class="n">BQ5</span><h3>Trends &amp; exceptions</h3><p>What to act on first</p></div></a>
         </div>
-        <a class="band" href="dashboard.html">Open the dashboard &raquo;</a>
+        <a class="band" href="/dashboard">Open the dashboard &raquo;</a>
       </div>
     </section>
 
@@ -363,7 +363,7 @@
       <div class="content wrap">
         <h2 class="display" id="finalTitle">See the <span class="red">numbers.</span></h2>
         <p class="fade-up">Filter by period, branch and business unit to see where ArmBar stands.</p>
-        <a class="btn btn-red fade-up" href="dashboard.html">Log in
+        <a class="btn btn-red fade-up" href="/dashboard">Log in
           <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
       </div>
@@ -420,10 +420,10 @@
     (() => {
       const $ = (s) => document.querySelector(s);
       const auth = $("#auth"), card = $("#authCard"), err = $("#authError");
-      let next = "dashboard.html", lastFocus = null;
+      let next = "/dashboard", lastFocus = null;
 
       function open(target) {
-        next = target || "dashboard.html";
+        next = target || "/dashboard";
         lastFocus = document.activeElement;
         auth.classList.add("open"); auth.setAttribute("aria-hidden", "false");
         document.documentElement.style.overflow = "hidden";
@@ -436,15 +436,15 @@
         if (window.__lenis) window.__lenis.start();
         err.classList.remove("show");
         if (lastFocus) lastFocus.focus({ preventScroll: true });
-        if (location.hash.startsWith("#login")) history.replaceState(null, "", location.pathname);
+        if (location.hash.startsWith("#login")) history.replaceState(null, "", "/");
       }
 
       // every link to the dashboard: go straight in if the server says we're signed in, otherwise open the overlay
-      document.querySelectorAll('a[href="dashboard.html"], a[href="login.html"], [data-login]').forEach((a) =>
+      document.querySelectorAll('a[href="/dashboard"], [data-login]').forEach((a) =>
         a.addEventListener("click", async (e) => {
           e.preventDefault();
           const s = await ArmBarAuth.session();
-          if (s.ok) location.href = "dashboard.html"; else open("dashboard.html");
+          if (s.ok) location.href = "/dashboard"; else open("/dashboard");
         }));
       auth.querySelectorAll("[data-close]").forEach((el) => el.addEventListener("click", close));
       document.addEventListener("keydown", (e) => {
@@ -480,8 +480,7 @@
 
       // arriving from the dashboard while signed out: open straight away
       if (location.hash.startsWith("#login")) {
-        const m = location.hash.match(/next=([^&]+)/);
-        setTimeout(() => open(m ? decodeURIComponent(m[1]) : "dashboard.html"), 350);
+        setTimeout(() => open("/dashboard"), 350);
       }
     })();
   </script>

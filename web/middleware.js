@@ -18,7 +18,7 @@ export default async function middleware(request) {
 
   const url = new URL(request.url);
   if (url.pathname === "/dashboard.html" || url.pathname === "/dashboard") {
-    return Response.redirect(new URL("/#login?next=dashboard.html", url), 307);
+    return Response.redirect(new URL("/#login", url), 307);
   }
   return new Response("Unauthorized", { status: 401, headers: { "Cache-Control": "no-store", "Content-Type": "text/plain" } });
 }

@@ -148,7 +148,7 @@
 <body>
   <header class="top">
     <div class="top-in">
-      <a class="logo" href="index.html" title="Back to home">ARM<span>BAR</span></a>
+      <a class="logo" href="/" title="Back to home">ARM<span>BAR</span></a>
       <button class="signout signout-top" type="button" data-signout>Sign out</button>
       <div class="filters" aria-label="Filters">
         <label>From<select id="fFrom"></select></label>
@@ -256,7 +256,7 @@
     <div class="foot">
       <div class="who"><span class="avatar" aria-hidden="true">GM</span><span><b id="whoName">admin</b><br><small>General Manager</small></span></div>
       <button class="signout" type="button" data-signout>Sign out</button>
-      <a href="index.html">← Back to home</a>
+      <a href="/">← Back to home</a>
       <span id="refreshSide"></span>
     </div>
   </aside>
@@ -268,10 +268,10 @@
   <script>
     ArmBarAuth.session().then((s) => {
       if (s.ok) { document.getElementById("whoName").textContent = s.data.user; return; }
-      if (s.status === 401) location.replace("index.html#login?next=" + encodeURIComponent("dashboard.html" + location.hash));
+      if (s.status === 401) location.replace("/#login");
     });
     document.querySelectorAll("[data-signout]").forEach((b) => b.addEventListener("click", async () => {
-      await ArmBarAuth.signOut(); location.replace("index.html");
+      await ArmBarAuth.signOut(); location.replace("/");
     }));
   </script>
 </body>

@@ -366,7 +366,6 @@
     document.querySelectorAll(".tab").forEach((x) => x.setAttribute("aria-selected", String(x.dataset.page === p)));
     $("#page-overview").hidden = p !== "overview";
     $("#page-drill").hidden = p !== "drill";
-    try { history.replaceState(null, "", "#" + p); } catch (_) {}
     scrollTo({ top: 0 });
     render();
   };
@@ -375,5 +374,5 @@
   $("#refreshSide").textContent = `Data refreshed ${D.generated}`;
 
   initFilters();
-  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => show(location.hash === "#drill" ? "drill" : "overview"));
+  (document.fonts ? document.fonts.ready : Promise.resolve()).then(() => show("overview"));
 })();
