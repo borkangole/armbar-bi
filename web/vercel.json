@@ -11,9 +11,8 @@
         { "key": "Content-Security-Policy", "value": "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'" }
       ]
     },
-    {
-      "source": "/(dashboard.html|data/(.*)|js/dashboard.js)",
-      "headers": [{ "key": "Cache-Control", "value": "private, no-store" }]
-    }
+    { "source": "/dashboard.html", "headers": [{ "key": "Cache-Control", "value": "private, no-store" }] },
+    { "source": "/data/:path*", "headers": [{ "key": "Cache-Control", "value": "private, no-store" }] },
+    { "source": "/js/dashboard.js", "headers": [{ "key": "Cache-Control", "value": "private, no-store" }] }
   ]
 }
