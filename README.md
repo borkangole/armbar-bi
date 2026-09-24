@@ -5,7 +5,10 @@ A deployable web dashboard for ArmBar (Gym + Bar, 5 branches), built on simulate
 ```
 armbar-bi/
 ├── web/                  <- THE WEBSITE. Deploy this folder only.
-│   ├── index.html        page layout (3 tabs)
+│   ├── index.html        3D landing page
+│   ├── dashboard.html    the dashboard (3 tabs)
+│   ├── imgs/             photos (.webp)
+│   ├── src/site.js       scroll animation source  ->  bundled to js/site.js
 │   ├── styles.css        light/dark theme
 │   ├── app.js            filters, KPIs, charts, exceptions logic
 │   ├── data/armbar-data.js   monthly aggregates (generated, do not edit by hand)
@@ -20,7 +23,16 @@ armbar-bi/
 
 ## 1. Preview it on your laptop
 
-Open `web/index.html` in a browser by double-clicking it. It needs no server or internet connection, so it also works as a backup during the live demo if the Wi-Fi fails.
+- Quick look: double-click `web/index.html`. Everything works except the 3D effect, because browsers block 3D textures on `file://` pages. You'll see the normal photo instead.
+- Full 3D locally: in the project folder run `npx serve web` (needs Node.js) or `python -m http.server -d web 8000`, then open the address it prints.
+
+## 1b. Landing page scroll animations
+
+- **GSAP ScrollTrigger**: headings flip up in 3D, the photo tiles swing in like cards (with parallax inside), the business-unit cards slide in from the side, the five questions become a pinned horizontal 3D carousel, the branch route draws itself, and the final title zooms in.
+- **Lenis**: smooth, inertial scrolling.
+- With "reduce motion" turned on in the OS, the animations are skipped.
+- After editing `src/site.js`, rebuild the bundle:
+  `npm i gsap lenis esbuild` then `npx esbuild web/src/site.js --bundle --minify --format=iife --outfile=web/js/site.js`
 
 ## 2. Deploy to your domain
 

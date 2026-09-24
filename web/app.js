@@ -4,6 +4,39 @@
   const D = window.ARMBAR_DATA;
   const $ = (s) => document.querySelector(s);
 
+  // ---------- EMPTY MODE: no data file loaded -> show the layout with empty panels ----------
+  // To turn data back on, re-add  <script src="data/armbar-data.js"></script>  in index.html.
+  if (!D) { renderEmptyShell(); return; }
+  function renderEmptyShell() {
+    const tiles = (labels) => labels.map((l) =>
+      `<div class="kpi"><span class="label">${l}</span><span class="value muted">—</span><span class="delta">&nbsp;</span></div>`).join("");
+    $("#kpisOverview").innerHTML = tiles(["Total revenue", "Operating profit", "Operating profit margin",
+      "Membership renewal rate", "Active gym members"]);
+    $("#kpisDrill").innerHTML = tiles(["New gym members", "Bar gross margin", "Member share of Bar sales",
+      "Bar discount rate", "Average Bar ticket"]);
+    const empty = `<div class="empty-state"><svg viewBox="0 0 24 24" width="28" height="28" aria-hidden="true">
+      <path fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg>
+      <span>No data yet</span><span class="small">This panel will fill in once the dataset is connected.</span></div>`;
+    document.querySelectorAll(".chart-box").forEach((b) => (b.innerHTML = empty));
+    document.querySelectorAll(".table-wrap").forEach((t) => (t.innerHTML = empty));
+    const tn = $("#thresholdNote"); if (tn) tn.textContent = "";
+    const gd = $("#genDate"); if (gd) gd.textContent = "No dataset connected yet.";
+    ["#fFrom", "#fTo", "#fBranch"].forEach((id) => { const el = $(id); el.innerHTML = "<option>—</option>"; el.disabled = true; });
+    $("#fUnit").disabled = true; $("#fReset").disabled = true;
+    $("#periodNote").textContent = "No data loaded";
+    document.querySelectorAll(".tab").forEach((t) => t.addEventListener("click", () => {
+      document.querySelectorAll(".tab").forEach((x) => x.setAttribute("aria-selected", String(x === t)));
+      document.querySelectorAll(".page").forEach((p) => (p.hidden = p.id !== "page-" + t.dataset.page));
+      document.querySelector(".filters").style.display = t.dataset.page === "about" ? "none" : "";
+    }));
+    try { const t = localStorage.getItem("armbar-theme"); if (t) document.documentElement.dataset.theme = t; } catch (_) {}
+    $("#themeToggle").onclick = () => {
+      const r = document.documentElement, dark = r.dataset.theme ? r.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+      r.dataset.theme = dark ? "light" : "dark";
+      try { localStorage.setItem("armbar-theme", r.dataset.theme); } catch (_) {}
+    };
+  }
+
   // ---------- expand compact tables into row objects ----------
   const T = {};
   for (const k of ["barProduct", "barMonth", "planMonth", "serviceMonth", "renewMonth", "activeMonth", "opexMonth"]) {

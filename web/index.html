@@ -3,122 +3,314 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ArmBar BI Dashboard</title>
-  <meta name="description" content="ArmBar Business Intelligence dashboard - branch and business-unit performance for ArmBar Gym and ArmBar Bar.">
+  <title>ArmBar BI</title>
+  <meta name="description" content="ArmBar Business Intelligence - one view of Gym and Bar performance across every branch.">
   <meta name="robots" content="noindex">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%230b0b0b'/%3E%3Ctext x='16' y='22' font-family='Arial Black,Arial' font-weight='900' font-size='15' fill='white' text-anchor='middle'%3EAB%3C/text%3E%3C/svg%3E">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Anton&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="preload" as="image" href="imgs/hero-bg.webp">
+  <style>
+    :root {
+      --black: #0a0a0a; --ink-2: rgba(20,20,20,.72); --line: rgba(255,255,255,.12);
+      --white: #fff; --grey: #b9b9b9; --muted: #8a8a8a;
+      --red: #e0182d; --red-dark: #b0101f;
+      --display: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+      --body: "Poppins", system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; }
+    html.lenis, html.lenis body { height: auto; }
+    .lenis.lenis-smooth { scroll-behavior: auto !important; }
+    body { background: var(--black); color: var(--white); font-family: var(--body); line-height: 1.6; overflow-x: hidden; }
+    a { color: inherit; }
+    img { display: block; max-width: 100%; }
+    .wrap { max-width: 1200px; margin: 0 auto; padding: 0 28px; }
+    .display { font-family: var(--display); font-weight: 400; text-transform: uppercase; letter-spacing: .5px; line-height: .95; margin: 0; }
+    .red { color: var(--red); }
+    .kicker { font-size: 13px; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin: 0 0 14px; }
+    h2.display { font-size: clamp(42px, 6vw, 84px); }
+
+    /* ---------- layering: section background (z 0) < content (z 2) < nav (z 10) ---------- */
+    section, header.hero, footer { position: relative; }
+    .bg { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .content { position: relative; z-index: 2; }
+
+    /* ---------- buttons ---------- */
+    .btn { display: inline-flex; align-items: center; justify-content: center; gap: 10px; padding: 15px 28px;
+           font-weight: 600; font-size: 14px; letter-spacing: .06em; text-transform: uppercase; text-decoration: none;
+           border-radius: 4px; transition: background .2s ease, color .2s ease, border-color .2s ease; }
+    .btn-red { background: var(--red); color: #fff; }
+    .btn-red:hover { background: var(--red-dark); }
+    .btn-line { border: 2px solid rgba(255,255,255,.7); color: #fff; }
+    .btn-line:hover { background: #fff; color: var(--black); border-color: #fff; }
+    .btn svg { width: 16px; height: 16px; }
+
+    /* ---------- nav ---------- */
+    .nav { position: fixed; inset: 0 0 auto 0; z-index: 10; transition: background .3s ease; }
+    .nav.scrolled { background: rgba(10,10,10,.92); }
+    .nav .wrap { display: flex; align-items: center; justify-content: space-between; padding-top: 18px; padding-bottom: 18px; }
+    .logo { font-family: var(--display); font-size: 30px; letter-spacing: 2px; text-decoration: none; }
+    .logo span { color: var(--red); }
+    .nav-links { display: flex; align-items: center; gap: 28px; font-size: 14px; font-weight: 500; }
+    .nav-links a:not(.btn) { text-decoration: none; color: rgba(255,255,255,.85); }
+    .nav-links a:not(.btn):hover { color: #fff; }
+    .nav-links .btn { padding: 11px 20px; font-size: 12px; }
+    .progress { position: absolute; left: 0; bottom: 0; height: 2px; width: 100%; background: var(--red);
+                transform-origin: 0 50%; transform: scaleX(0); }
+
+    /* ---------- hero ---------- */
+    .hero { min-height: 100vh; min-height: 100svh; display: flex; align-items: center; }
+    .hero .bg { background: url("imgs/hero-bg.webp") center 60% / cover no-repeat; will-change: transform; }
+    .hero .bg::after { content: ""; position: absolute; inset: 0;
+      background: linear-gradient(90deg, rgba(10,10,10,.95) 0%, rgba(10,10,10,.55) 55%, rgba(10,10,10,.2) 100%),
+                  linear-gradient(0deg, var(--black) 0%, rgba(10,10,10,0) 35%); }
+    .hero .content { width: 100%; padding-top: 110px; padding-bottom: 60px; perspective: 900px; will-change: transform, opacity; }
+    .hero h1 { font-size: clamp(54px, 8.4vw, 116px); margin-bottom: 24px; }
+    .line { display: block; overflow: hidden; padding-bottom: .04em; }
+    .line > span { display: inline-block; transform-origin: 50% 100%; }
+    .hero p.lede { max-width: 520px; font-size: 18px; color: #d6d6d6; margin: 0 0 34px; }
+    .hero .cta { display: flex; gap: 14px; flex-wrap: wrap; }
+    .stats { display: flex; gap: 48px; flex-wrap: wrap; margin-top: 48px; padding-top: 28px; border-top: 1px solid var(--line); max-width: 640px; }
+    .stat b { display: block; font-family: var(--display); font-weight: 400; font-size: 44px; line-height: 1; }
+    .stat span { font-size: 13px; color: var(--grey); letter-spacing: .05em; text-transform: uppercase; }
+    .scroll-cue { position: absolute; left: 50%; bottom: 26px; z-index: 2; transform: translateX(-50%); font-size: 11px;
+                  letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.55); display: flex; flex-direction: column; align-items: center; gap: 10px; }
+    .scroll-cue i { width: 1px; height: 42px; background: linear-gradient(var(--red), transparent); animation: cue 1.8s ease-in-out infinite; transform-origin: top; }
+    @keyframes cue { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(0); transform-origin: bottom; } }
+
+    /* ---------- tiles ---------- */
+    .tiles-sec { padding: 120px 0 0; }
+    .tiles-sec .head { text-align: center; margin-bottom: 56px; perspective: 900px; }
+    .tiles { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; padding: 0 14px; perspective: 1400px; }
+    .tile { position: relative; aspect-ratio: 3 / 4; overflow: hidden; text-decoration: none; border-radius: 6px;
+            transform-style: preserve-3d; will-change: transform; }
+    .tile .ph { position: absolute; inset: -6%; }
+    .tile img { width: 100%; height: 100%; object-fit: cover; }
+    .tile .ph { will-change: transform; }
+    .tile::after { content: ""; position: absolute; inset: 0; z-index: 1;
+      background: linear-gradient(0deg, rgba(10,10,10,.92) 0%, rgba(10,10,10,.1) 60%); transition: background .35s ease; }
+    .tile:hover::after { background: linear-gradient(0deg, rgba(176,16,31,.92) 0%, rgba(224,24,45,.4) 100%); }
+    .tile .t { position: absolute; z-index: 2; left: 22px; right: 22px; bottom: 22px; }
+    .tile .n { font-family: var(--display); color: var(--red); font-size: 20px; transition: color .35s ease; }
+    .tile:hover .n { color: #fff; }
+    .tile h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 30px; line-height: 1; margin: 4px 0 8px; }
+    .tile p { margin: 0; font-size: 14px; color: #dcdcdc; }
+    .band { display: block; background: var(--red); text-align: center; padding: 16px; font-weight: 700; letter-spacing: .12em;
+            text-transform: uppercase; text-decoration: none; font-size: 15px; margin-top: 14px; transition: background .2s ease; }
+    .band:hover { background: var(--red-dark); }
+
+    /* ---------- about ---------- */
+    .about { padding: 160px 0; }
+    .about .content { perspective: 1000px; }
+    .about-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 72px; align-items: center; }
+    .about p { color: var(--grey); margin: 20px 0 0; max-width: 50ch; }
+    .units { display: grid; gap: 18px; }
+    .unit { border-left: 4px solid var(--red); background: #151515; padding: 30px 30px; }
+    .unit h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; margin: 0 0 6px; line-height: 1; }
+    .unit p { margin: 0; font-size: 14px; }
+
+    /* ---------- questions (pinned 3D carousel) ---------- */
+    .qs { overflow: hidden; }
+    .qs .content { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 100px 0; }
+    .qs .head { margin-bottom: 48px; }
+    .track-wrap { perspective: 1400px; }
+    .track { display: flex; gap: 28px; padding: 0 calc(50vw - 190px); transform-style: preserve-3d; will-change: transform; }
+    .qcard { flex: 0 0 380px; min-height: 360px; padding: 34px 30px; border: 1px solid var(--line); border-radius: 8px;
+             background: linear-gradient(160deg, #1d1d1d, #0f0f0f);
+             display: flex; flex-direction: column; justify-content: space-between; transform-style: preserve-3d; will-change: transform; }
+    .qcard .n { font-family: var(--display); font-size: 88px; line-height: .9; color: var(--red); }
+    .qcard h3 { font-family: var(--display); font-weight: 400; text-transform: uppercase; font-size: 34px; line-height: 1; margin: 0 0 10px; }
+    .qcard p { color: var(--grey); margin: 0; font-size: 15px; }
+
+    /* ---------- branches ---------- */
+    .branches { padding: 160px 0; }
+    .route { display: grid; grid-template-columns: repeat(5, 1fr); margin-top: 64px; position: relative; perspective: 800px; }
+    .route .rail { position: absolute; left: 10%; right: 10%; top: 9px; height: 2px; background: var(--line); }
+    .route .rail i { position: absolute; inset: 0; background: var(--red); transform-origin: 0 50%; transform: scaleX(0); }
+    .stop { text-align: center; position: relative; }
+    .stop i { display: block; width: 20px; height: 20px; margin: 0 auto 16px; border-radius: 50%; background: var(--black);
+              border: 3px solid var(--grey); position: relative; }
+    .stop.hq i { border-color: var(--red); background: var(--red); box-shadow: 0 0 18px var(--red); }
+    .stop b { display: block; font-family: var(--display); font-weight: 400; font-size: 28px; text-transform: uppercase; line-height: 1.1; }
+    .stop span { font-size: 12px; color: var(--muted); letter-spacing: .1em; text-transform: uppercase; }
+
+    /* ---------- final ---------- */
+    .final { min-height: 100vh; display: flex; align-items: center; text-align: center; overflow: hidden; }
+    .final .bg { background: url("imgs/final-bg.webp") center / cover no-repeat; will-change: transform; }
+    .final .bg::after { content: ""; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(176,16,31,.35), rgba(10,10,10,.95) 70%); }
+    .final .content { width: 100%; perspective: 900px; }
+    .final h2 { font-size: clamp(56px, 11vw, 170px); margin-bottom: 20px; }
+    .final p { color: #f1f1f1; margin: 0 auto 34px; max-width: 46ch; font-size: 17px; }
+
+    footer { padding: 28px 0 36px; color: var(--muted); font-size: 13px; border-top: 1px solid var(--line); }
+    footer .content { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+    /* ---------- responsive ---------- */
+    @media (max-width: 960px) {
+      .tiles { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+      .units { grid-template-columns: 1fr; }
+      .qs .content { min-height: 0; }
+      .track { flex-direction: column; padding: 0 28px; gap: 16px; }
+      .qcard { flex: none; min-height: 0; }
+      .qcard .n { font-size: 56px; }
+      .route { grid-template-columns: 1fr; gap: 22px; }
+      .route .rail { left: 9px; right: auto; top: 10px; bottom: 10px; width: 2px; height: auto; }
+      .route .rail i { transform-origin: 50% 0; }
+      .stop { display: grid; grid-template-columns: 20px 1fr; column-gap: 18px; text-align: left; align-items: center; }
+      .stop i { margin: 0; grid-row: span 2; }
+    }
+    @media (max-width: 640px) {
+      .wrap { padding: 0 16px; }
+      .nav-links a:not(.btn) { display: none; }
+      .scroll-cue { display: none; }
+      .stats { gap: 24px; margin-top: 36px; }
+      .stat b { font-size: 34px; }
+      .hero .btn { flex: 1 1 100%; }
+      .tile h3 { font-size: 22px; }
+      .tile .t { left: 14px; right: 14px; bottom: 14px; }
+      .tile p { display: none; }
+      .tiles-sec { padding-top: 90px; }
+      .about, .branches { padding: 100px 0; }
+      .track { padding: 0 16px; }
+    }
+    @media (prefers-reduced-motion: reduce) { .scroll-cue i { animation: none; } }
+  </style>
 </head>
 <body>
-  <header class="topbar">
-    <div class="brand">
-      <span class="logo">ARMBAR</span>
-      <span class="brand-sub">Business Intelligence</span>
-    </div>
-    <nav class="tabs" role="tablist" aria-label="Dashboard pages">
-      <button role="tab" class="tab" aria-selected="true" data-page="overview">Performance overview</button>
-      <button role="tab" class="tab" aria-selected="false" data-page="drilldown">Gym &amp; Bar drilldown</button>
-      <button role="tab" class="tab" aria-selected="false" data-page="about">Data &amp; KPIs</button>
-    </nav>
-    <button id="themeToggle" class="icon-btn" type="button" aria-label="Toggle dark mode" title="Toggle dark mode">
-      <svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 3a9 9 0 1 0 9 9 7 7 0 0 1-9-9z"/></svg>
-    </button>
-  </header>
 
-  <section class="filters" aria-label="Filters">
-    <label>From <select id="fFrom"></select></label>
-    <label>To <select id="fTo"></select></label>
-    <label>Branch <select id="fBranch"></select></label>
-    <label>Business unit
-      <select id="fUnit">
-        <option value="all">Gym + Bar</option>
-        <option value="0">ArmBar Gym</option>
-        <option value="1">ArmBar Bar</option>
-      </select>
-    </label>
-    <button id="fReset" class="link-btn" type="button">Reset</button>
-    <span id="periodNote" class="muted small"></span>
-  </section>
+  <nav class="nav" id="nav" aria-label="Main">
+    <div class="wrap">
+      <a class="logo" href="#top">ARM<span>BAR</span></a>
+      <div class="nav-links">
+        <a href="#about">About</a>
+        <a href="#questions">Questions</a>
+        <a href="#branches">Branches</a>
+        <a class="btn btn-red" href="dashboard.html">Dashboard</a>
+      </div>
+    </div>
+    <div class="progress" id="progress"></div>
+  </nav>
 
   <main>
-    <!-- ============================== PAGE 1 ============================== -->
-    <section id="page-overview" class="page" role="tabpanel">
-      <div class="kpis" id="kpisOverview"></div>
-
-      <div class="grid g-2">
-        <article class="card">
-          <header><h2>Monthly revenue by business unit</h2><p class="q">BQ1 · Is performance rising, falling or stable?</p></header>
-          <div class="chart-box"><canvas id="cRevTrend"></canvas></div>
-        </article>
-        <article class="card">
-          <header><h2>Revenue by branch</h2><p class="q">BQ2/BQ3 · Where does revenue come from, Gym or Bar?</p></header>
-          <div class="chart-box"><canvas id="cRevBranch"></canvas></div>
-        </article>
+    <header class="hero" id="top">
+      <div class="bg"></div>
+      <div class="content wrap">
+        <p class="kicker fade-up">ArmBar Business Intelligence</p>
+        <h1 class="display" id="heroTitle">
+          <span class="line"><span>Every branch.</span></span>
+          <span class="line"><span>Every rep.</span></span>
+          <span class="line"><span class="red">Every peso.</span></span>
+        </h1>
+        <p class="lede fade-up">One dashboard for ArmBar Gym and ArmBar Bar. See how each branch performs, compare the two businesses, and find what needs attention first.</p>
+        <div class="cta fade-up">
+          <a class="btn btn-red" href="dashboard.html">Open dashboard
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+          </a>
+          <a class="btn btn-line" href="#questions">What it answers</a>
+        </div>
+        <div class="stats fade-up">
+          <div class="stat"><b>5</b><span>Branches</span></div>
+          <div class="stat"><b>2</b><span>Business units</span></div>
+          <div class="stat"><b>5</b><span>Business questions</span></div>
+        </div>
       </div>
+      <div class="scroll-cue" aria-hidden="true">Scroll<i></i></div>
+    </header>
 
-      <div class="grid g-2">
-        <article class="card">
-          <header><h2>Operating profit margin by branch</h2><p class="q">BQ2/BQ3 · Which branch and unit turns revenue into profit?</p></header>
-          <div class="chart-box"><canvas id="cMarginBranch"></canvas></div>
-        </article>
-        <article class="card">
-          <header><h2>Branches needing attention</h2><p class="q">BQ5 · Exceptions vs. thresholds, selected period</p></header>
-          <div class="table-wrap"><table class="tbl" id="tExceptions"></table></div>
-          <p class="muted small" id="thresholdNote"></p>
-        </article>
-      </div>
-    </section>
-
-    <!-- ============================== PAGE 2 ============================== -->
-    <section id="page-drilldown" class="page" role="tabpanel" hidden>
-      <div class="kpis" id="kpisDrill"></div>
-
-      <div class="grid g-2">
-        <article class="card">
-          <header><h2>Membership renewal rate by branch <span class="muted small">(3-month rolling)</span></h2><p class="q">Gym · Which branches are losing members?</p></header>
-          <div class="chart-box"><canvas id="cRenewal"></canvas></div>
-        </article>
-        <article class="card">
-          <header><h2>Bar gross margin and member share of sales</h2><p class="q">Bar · What did the 15% member discount (from Jan 2026) do?</p></header>
-          <div class="chart-box"><canvas id="cBarMargin"></canvas></div>
-        </article>
-      </div>
-
-      <div class="grid g-2">
-        <article class="card">
-          <header><h2>Bar products by gross profit</h2><p class="q">BQ4 · Which Bar products contribute most?</p></header>
-          <div class="chart-box tall"><canvas id="cProducts"></canvas></div>
-        </article>
-        <article class="card">
-          <header><h2>Gym revenue by membership plan and service</h2><p class="q">BQ4 · Which Gym offerings contribute most?</p></header>
-          <div class="chart-box tall"><canvas id="cGymMix"></canvas></div>
-        </article>
+    <section class="tiles-sec">
+      <div class="content">
+        <div class="head wrap">
+          <p class="kicker">Dashboard views</p>
+          <h2 class="display flip">Built for <span class="red">decisions.</span></h2>
+        </div>
+        <div class="tiles">
+          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/miguel-bw.webp" alt="ArmBar gym member" style="object-position: 50% 20%"></div>
+            <div class="t"><span class="n">BQ1</span><h3>Overall performance</h3><p>Revenue and profit over time</p></div></a>
+          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/img4-portrait-bw.webp" alt=""></div>
+            <div class="t"><span class="n">BQ2</span><h3>Branch comparison</h3><p>Who's ahead, who needs help</p></div></a>
+          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/img1-bw.webp" alt="" style="object-position: 30% center"></div>
+            <div class="t"><span class="n">BQ3</span><h3>Gym vs Bar</h3><p>Two businesses, side by side</p></div></a>
+          <a class="tile" href="dashboard.html"><div class="ph"><img src="imgs/img2-bw.webp" alt="" style="object-position: 62% center"></div>
+            <div class="t"><span class="n">BQ5</span><h3>Trends &amp; exceptions</h3><p>What to act on first</p></div></a>
+        </div>
+        <a class="band" href="dashboard.html">Open the dashboard &raquo;</a>
       </div>
     </section>
 
-    <!-- ============================== PAGE 3 ============================== -->
-    <section id="page-about" class="page" role="tabpanel" hidden>
-      <article class="card">
-        <header><h2>KPI definitions</h2><p class="q">How every number on this dashboard is calculated</p></header>
-        <div class="table-wrap"><table class="tbl" id="tKpiDefs"></table></div>
-      </article>
-      <article class="card">
-        <header><h2>Data-quality log</h2><p class="q">Issues found in the source exports and how the preparation step treated them</p></header>
-        <div class="table-wrap"><table class="tbl" id="tDq"></table></div>
-      </article>
-      <article class="card">
-        <header><h2>About this prototype</h2></header>
-        <p class="prose">Data: simulated ArmBar operating data, Jan 2025 – Jun 2026, 5 branches. Sources: Gym membership system,
-          Bar point-of-sale, Finance expense sheet. Pipeline: <code>generate_raw.py</code> → <code>prepare.py</code> (cleaning,
-          integration, star schema) → this dashboard. Revenue is recorded on a cash basis (membership fees count in the month paid).
-          <span id="genDate"></span></p>
-      </article>
+    <section class="about" id="about">
+      <div class="content wrap">
+        <div class="about-grid">
+          <div>
+            <p class="kicker">About ArmBar</p>
+            <h2 class="display flip">Two businesses.<br><span class="red">One roof.</span></h2>
+            <p class="fade-up">ArmBar is headquartered in Roxas City, Capiz, with branches across Panay Island, Cebu and Manila. Every branch runs both a gym and a bar.</p>
+            <p class="fade-up">That means twice the data and twice the decisions. This project brings it all into one place, so management compares branches and business units with the same numbers.</p>
+          </div>
+          <div class="units">
+            <div class="unit"><h3>ArmBar Gym</h3><p>Memberships, personal training, group classes and day passes.</p></div>
+            <div class="unit"><h3>ArmBar Bar</h3><p>Food, drinks and social space, right next to the gym floor.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="qs" id="questions">
+      <div class="content">
+        <div class="head wrap">
+          <p class="kicker">What the dashboard answers</p>
+          <h2 class="display flip">Five questions.<br><span class="red">One view.</span></h2>
+        </div>
+        <div class="track-wrap">
+          <div class="track" id="track">
+            <article class="qcard"><span class="n">01</span><div><h3>Overall performance</h3><p>Is ArmBar's performance rising, falling, or flat over time?</p></div></article>
+            <article class="qcard"><span class="n">02</span><div><h3>Branch performance</h3><p>How do branches compare, and which need management attention?</p></div></article>
+            <article class="qcard"><span class="n">03</span><div><h3>Gym vs Bar</h3><p>How do ArmBar Gym and ArmBar Bar compare across branches?</p></div></article>
+            <article class="qcard"><span class="n">04</span><div><h3>Products &amp; services</h3><p>Which memberships, services and bar products contribute the most?</p></div></article>
+            <article class="qcard"><span class="n">05</span><div><h3>Trends &amp; exceptions</h3><p>What unusual patterns should management investigate first?</p></div></article>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="branches" id="branches">
+      <div class="content wrap">
+        <p class="kicker">Branch network</p>
+        <h2 class="display flip">From Capiz <span class="red">to Manila.</span></h2>
+        <div class="route" id="route">
+          <div class="rail"><i></i></div>
+          <div class="stop hq"><i></i><b>Roxas City</b><span>Headquarters</span></div>
+          <div class="stop"><i></i><b>Iloilo City</b><span>Panay Island</span></div>
+          <div class="stop"><i></i><b>Kalibo</b><span>Panay Island</span></div>
+          <div class="stop"><i></i><b>Cebu City</b><span>Cebu</span></div>
+          <div class="stop"><i></i><b>Manila</b><span>Metro Manila</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="final">
+      <div class="bg"></div>
+      <div class="content wrap">
+        <h2 class="display" id="finalTitle">See the <span class="red">numbers.</span></h2>
+        <p class="fade-up">Filter by period, branch and business unit to see where ArmBar stands.</p>
+        <a class="btn btn-red fade-up" href="dashboard.html">Open dashboard
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+      </div>
     </section>
   </main>
 
-  <div id="tooltip" class="sr-only" aria-live="polite"></div>
-  <script src="vendor/chart.umd.min.js"></script>
-  <script src="data/armbar-data.js"></script>
-  <script src="app.js"></script>
+  <footer>
+    <div class="content wrap">
+      <span>ArmBar Business Intelligence Project</span>
+      <span>CIS 216 · West Visayas State University</span>
+    </div>
+  </footer>
+
+  <!-- Scroll animations (GSAP ScrollTrigger + Lenis). Source: src/site.js -->
+  <script src="js/site.js" defer></script>
 </body>
 </html>

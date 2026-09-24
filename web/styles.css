@@ -46,7 +46,7 @@ body { background: var(--page); color: var(--text); font-size: 14px; line-height
   background: var(--header); color: var(--header-text);
   padding: 10px 24px; position: sticky; top: 0; z-index: 10;
 }
-.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand { display: flex; align-items: baseline; gap: 10px; color: inherit; text-decoration: none; }
 .logo { font-family: Impact, "Arial Black", system-ui, sans-serif; font-size: 24px; letter-spacing: 1px; }
 .brand-sub { font-size: 12px; opacity: .7; }
 .tabs { display: flex; gap: 4px; flex: 1; flex-wrap: wrap; }
@@ -122,6 +122,12 @@ main { padding: 20px 24px 40px; max-width: 1440px; margin: 0 auto; }
 .flags { color: var(--text-2); font-size: 12px; min-width: 200px; }
 .prose { color: var(--text-2); max-width: 90ch; margin: 0; }
 code { font-size: 12px; background: var(--page); padding: 1px 4px; border-radius: 4px; }
+.empty-state {
+  height: 100%; min-height: 160px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px; color: var(--muted); border: 1px dashed var(--grid); border-radius: 8px; text-align: center; padding: 16px;
+}
+.empty-state span:first-of-type { color: var(--text-2); font-weight: 500; }
+.filters select:disabled, .link-btn:disabled { opacity: .5; cursor: not-allowed; }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
 
 @media (max-width: 640px) {
